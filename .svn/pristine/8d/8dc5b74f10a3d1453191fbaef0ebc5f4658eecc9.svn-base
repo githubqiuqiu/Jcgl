@@ -1,0 +1,147 @@
+package com.edu.service.impl;
+
+import java.util.List;
+
+import com.edu.service.QiuService;
+import com.edu.bean.OrganizationBean;
+import com.edu.bean.RoleBean;
+import com.edu.dao.QiuDao;
+import com.edu.model.Organization;
+import com.edu.model.Role;
+import com.edu.model.User;
+
+public class QiuServiceImpl implements QiuService{
+	private QiuDao qiuDao;
+
+	public QiuDao getQiuDao() {
+		return qiuDao;
+	}
+
+	public void setQiuDao(QiuDao qiuDao) {
+		this.qiuDao = qiuDao;
+	}
+
+	@Override
+	public List<User> showlist(int begin, int row) {
+		List<User> list=qiuDao.showlist(begin, row);
+		return list;
+	}
+	
+	@Override
+	public List<User> showlistbyname(int begin, int row, String name) {
+		List<User> list=qiuDao.showlistbyname(begin, row,name);
+		return list;
+	}
+	
+
+	@Override
+	public int listcount() {
+		int i=qiuDao.listcount();
+		return i;
+	}
+
+	
+
+	@Override
+	public List<User> findUser(String uname) {
+		List<User> list=qiuDao.findUser(uname);
+		return list;
+	}
+
+	@Override
+	public List<User> selectUser(String uname, String pwd) {
+		List<User> list=qiuDao.selectUser(uname, pwd);
+		return list;
+	}
+
+	@Override
+	public int listcount1() {
+		int i=qiuDao.listcount1();
+		return i;
+	}
+
+	@Override
+	public List<Role> showlist1(int begin, int row) {
+		List<Role> list=qiuDao.showlist1(begin, row);
+		return list;
+	}
+
+	@Override
+	public void addrole(Role role) {
+		qiuDao.addrole(role);
+	}
+
+	@Override
+	public void adduser(User user) {
+		qiuDao.adduser(user);
+	}
+
+	@Override
+	public void adddep(Organization o) {
+		qiuDao.adddep(o);
+	}
+
+	@Override
+	public void delrole(int id) {
+		qiuDao.delrole(id);
+	}
+
+	@Override
+	public void delorg(int id) {
+		qiuDao.delorg(id);
+	}
+
+	@Override
+	public void resertpwd(int id) {
+		qiuDao.resertpwd(id);
+	}
+
+	@Override
+	public Role selrole(int id) {
+		Role role=qiuDao.selrole(id);
+		return role;
+	}
+
+	@Override
+	public User seluser(int id) {
+		User u=qiuDao.seluser(id);
+		return u;
+	}
+
+	@Override
+	public Organization selorg(int id) {
+		Organization o=qiuDao.selorg(id);
+		return o;
+	}
+	
+	@Override
+	public void saverole(Role r) {
+		qiuDao.saverole(r);
+	}
+
+	@Override
+	public void savauser(User u) {
+		qiuDao.savauser(u);
+	}
+
+	@Override
+	public void savedep(Organization o) {
+		qiuDao.savedep(o);
+	}
+
+	@Override
+	public List<OrganizationBean> selorg() {
+		List<OrganizationBean> list=qiuDao.selorg();
+		return list;
+	}
+
+	@Override
+	public List<RoleBean> selrole() {
+		List<RoleBean> list=qiuDao.selrole();
+		return list;
+	}
+
+	
+
+	
+}

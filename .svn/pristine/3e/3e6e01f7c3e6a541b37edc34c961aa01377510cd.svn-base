@@ -1,0 +1,8 @@
+package com.edu.service;
+
+import java.util.List;
+
+public interface MinService {
+	public List seldep(int pag,int row);
+	public int line();
+}

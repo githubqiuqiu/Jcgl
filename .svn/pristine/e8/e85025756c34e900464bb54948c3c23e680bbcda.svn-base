@@ -1,0 +1,18 @@
+package com.edu.service.impl;
+
+import com.edu.dao.impl.FengDaoImpl;
+import com.edu.service.FengService;
+
+public class FengServiceImpl implements FengService{
+	private	FengDaoImpl fengDao;
+
+	public FengDaoImpl getFengDao() {
+		return fengDao;
+	}
+
+	public void setFengDao(FengDaoImpl fengDao) {
+		this.fengDao = fengDao;
+	}
+	
+	
+}

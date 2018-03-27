@@ -1,0 +1,397 @@
+package com.edu.dao.impl;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.edu.bean.AcaspeBean;
+import com.edu.dao.MinDao;
+import com.edu.model.Academy;
+import com.edu.model.Acaspe;
+import com.edu.model.Organization;
+import com.edu.model.Specialty;
+
+public class MinDaoImpl implements MinDao {
+
+	private HibernateTemplate hibernateTemplate;
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	@Override
+	public List<Organization> seldata(int pag,int row) {
+		try {
+        	 List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+       			 
+                 public Object doInHibernate(Session session)  
+                          throws HibernateException, SQLException {  
+                     List list2 = session.createQuery("from Organization")  
+                             .setFirstResult((pag-1)*row)  
+                             .setMaxResults(row)  
+                             .list();                     
+                     return list2;  
+                 }});  
+             return list;  
+        	 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public int selline() {
+//		System.out.println("456!");
+		// TODO Auto-generated method stub
+		Long count = (Long)hibernateTemplate.find("select count(*) from Organization").listIterator().next();
+//		System.out.println(count.intValue());
+		return count.intValue();
+	}
+	//----------------------------------------------------------专业管理
+	@Override
+	public List<Academy> list(int page, int rows) {
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					List list2 = session
+							.createQuery(
+									"from Academy a inner join a.acaspes c inner join c.specialty order by a.aid asc")
+							.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
+					return list2;
+				}
+			});
+			return list;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@Override
+	public int count() {
+		Long count = (Long) hibernateTemplate.find("select count(*) from Academy").listIterator().next();
+		return count.intValue();
+	}
+
+	@Override
+	public void add(Academy academy) {
+		// TODO Auto-generated method stub
+		hibernateTemplate.save(academy);
+	}
+
+	@Override
+	public void del(int id) {
+		// TODO Auto-generated method stub
+		Acaspe a = hibernateTemplate.get(Acaspe.class, id);
+		hibernateTemplate.delete(a);
+	}
+
+	@Override
+	public void edit(Academy academy) {
+		Academy a = hibernateTemplate.get(Academy.class, academy.getAid());
+		a.setAflag(academy.getAflag());
+		a.setAschool(academy.getAschool());
+		hibernateTemplate.update(a);
+	}
+
+	@Override
+	public List<Academy> slist(int page, int rows, String aschool, int aflag) {
+
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session.createQuery(
+							"from Academy a inner join a.acaspes c inner join c.specialty s where a.aschool like ? and aflag = ?")
+							.setFirstResult((page - 1) * rows).setMaxResults(rows);
+					q.setString(0, aschool + "%");
+					q.setInteger(1, aflag);
+					List list2 = q.list();
+					return list2;
+				}
+			});
+			return list;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Academy> slist(int page, int rows, String aschool) {
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session.createQuery(
+							"from Academy a inner join a.acaspes c inner join c.specialty s where a.aschool like ?")
+							.setFirstResult((page - 1) * rows).setMaxResults(rows);
+					q.setString(0, aschool + "%");
+					List list2 = q.list();
+					return list2;
+				}
+			});
+			return list;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Academy> slist(int page, int rows, int aflag) {
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session
+							.createQuery(
+									"from Academy a inner join a.acaspes c inner join c.specialty s where a.aflag = ?")
+							.setFirstResult((page - 1) * rows).setMaxResults(rows);
+					q.setInteger(0, aflag);
+					List list2 = q.list();
+					return list2;
+				}
+			});
+			return list;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public AcaspeBean selbean(int aid, int sid) {
+		// Academy a = hibernateTemplate.get(Academy.class, aid);
+		// List list = hibernateTemplate.find("from Academy a inner join a.acaspes c
+		// inner join c.specialty where a.aid=?",aid);
+		// AcaspeBean b = (AcaspeBean)list.get(0);
+		// return b;
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session.createQuery(
+							"from Academy a inner join a.acaspes c inner join c.specialty s where a.aid=? and s.sid=?");
+
+					q.setInteger(0, aid);
+					q.setInteger(1, sid);
+					List list2 = q.list();
+					return list2;
+				}
+			});
+			Object[] o = (Object[]) list.get(0);
+			Academy a = (Academy) o[0];
+			Acaspe c = (Acaspe) o[1];
+			Specialty s = (Specialty) o[2];
+
+			AcaspeBean b = new AcaspeBean();
+			b.setAid(a.getAid());
+			b.setAflag(a.getAflag());
+			b.setAschool(a.getAschool());
+			b.setSid(s.getSid());
+			b.setSname(s.getSname());
+			b.setAsid(c.getAsid());
+
+			return b;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@Override
+	public List selsname(int aid) {
+		// TODO Auto-generated method stub
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session.createQuery(
+							"from Academy a inner join a.acaspes c inner join c.specialty s where a.aid=?");
+
+					q.setInteger(0, aid);
+					List list2 = q.list();
+					return list2;
+				}
+			});
+
+			return list;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	@Override
+	public List selname() {
+		// TODO Auto-generated method stub
+		List l = hibernateTemplate.find("from Specialty");
+		return l;
+	}
+
+	@Override
+	public void addsname(Specialty specialty) {
+		// TODO Auto-generated method stub
+		hibernateTemplate.save(specialty);
+	}
+
+	@Override
+	public int selsid() {
+		// TODO Auto-generated method stub
+		Integer count = (Integer) hibernateTemplate.find("select max(sid) from Specialty").listIterator().next();
+		return count.intValue();
+	}
+
+	@Override
+	public void editsid(int asid, int sid) {
+		// TODO Auto-generated method stub
+		Acaspe a = hibernateTemplate.get(Acaspe.class, asid);
+		a.setSid(sid);
+		hibernateTemplate.update(a);
+	}
+
+	@Override
+	public int selsid(String sname) {
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session.createQuery("from Specialty where sname =?");
+					q.setString(0, sname);
+					List list2 = q.list();
+					return list2;
+				}
+			});
+			Specialty s = (Specialty) list.get(0);
+
+			return s.getSid();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public List selaname() {
+		// TODO Auto-generated method stub
+		List list = hibernateTemplate.find("from Academy");
+		List list2 = new ArrayList();
+		for (int i = 0; i < list.size(); i++) {
+			Academy a = (Academy) list.get(i);
+			list2.add(a.getAschool());
+		}
+		return list2;
+	}
+
+	@Override
+	public void addacaspe(Acaspe a) {
+		// TODO Auto-generated method stub
+		hibernateTemplate.save(a);
+	}
+
+	@Override
+	public int selaid() {
+		Integer count = (Integer) hibernateTemplate.find("select max(aid) from Academy").listIterator().next();
+		return count;
+	}
+
+	@Override
+	public int selacaspecount() {
+		Long count = (Long) hibernateTemplate.find("select count(*) from Acaspe").listIterator().next();
+		// Long count = (Long)hibernateTemplate.find("select count(*) from
+		// Acaspe").listIterator().next();
+		return count.intValue();
+	}
+
+	@Override
+	public List selaidbyaflag(int aflag) {
+		List list = hibernateTemplate.find("from Academy where aflag =?", aflag);
+		List l = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			Academy a = (Academy) list.get(i);
+			l.add(a.getAid());
+		}
+		return l;
+	}
+
+	@Override
+	public int selacaspecount(int aid) {
+		Long count = (Long) hibernateTemplate.find("select count(*) from Acaspe where acid=?", aid).listIterator()
+				.next();
+		return count.intValue();
+	}
+
+	@Override
+	public List selaidbyaschool(String aschool) {
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session.createQuery("from Academy where aschool like ?");
+					q.setString(0, aschool + "%");
+					List list2 = q.list();
+					return list2;
+				}
+			});
+
+			List l = new ArrayList<>();
+			for (int i = 0; i < list.size(); i++) {
+				Academy a = (Academy) list.get(i);
+				l.add(a.getAid());
+			}
+
+			return l;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List selaidbyaschoolaflag(String aschool, int aflag) {
+		try {
+			List list = hibernateTemplate.executeFind(new HibernateCallback() {
+
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					Query q = session.createQuery("from Academy where aschool like ? and aflag=?");
+					q.setString(0, aschool + "%");
+					q.setInteger(1, aflag);
+					List list2 = q.list();
+					return list2;
+				}
+			});
+
+			List l = new ArrayList<>();
+			for (int i = 0; i < list.size(); i++) {
+				Academy a = (Academy) list.get(i);
+				l.add(a.getAid());
+			}
+
+			return l;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
+}

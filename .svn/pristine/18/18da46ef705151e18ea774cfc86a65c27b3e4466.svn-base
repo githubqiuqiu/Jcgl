@@ -1,0 +1,47 @@
+package com.edu.dao;
+
+import java.util.List;
+
+import com.edu.bean.AcaspeBean;
+import com.edu.model.Academy;
+import com.edu.model.Acaspe;
+import com.edu.model.Organization;
+import com.edu.model.Specialty;
+
+public interface MinDao {
+	//查询数据
+	public List<Organization> seldata(int pag,int row);
+	//查条数
+	public int selline();
+	//-----------------------------------------------------------专业管理
+	public List<Academy> list(int page,int rows);
+	public int count();
+	public void add(Academy academy);
+	public void del(int aid);
+	public void edit(Academy academy);
+	//2个参数
+	public List<Academy> slist(int page,int rows,String aschool,int aflag);
+	//1个参数
+ 	public List<Academy> slist(int page,int rows,String aschool);
+	//1个参数
+	public List<Academy> slist(int page,int rows,int aflag);
+	public	AcaspeBean selbean(int aid,int sid);
+	public List selsname(int aid);
+	public List selname();
+	public void addsname(Specialty specialty);
+	public int selsid();
+	public void editsid(int asid,int sid);
+	public int selsid(String sname);
+	//查询学校名
+	public List selaname();
+	//院校专业表添加值
+	public void addacaspe(Acaspe a);
+	public int selaid();
+	
+	public int selacaspecount();
+	public List selaidbyaflag(int aflag);
+	public int selacaspecount(int aid);
+
+	public List selaidbyaschool(String aschool);
+	public List selaidbyaschoolaflag(String aschool,int aflag);
+}

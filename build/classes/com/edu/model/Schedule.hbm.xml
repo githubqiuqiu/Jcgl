@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    	<class name="com.edu.model.Schedule" table="schedule">
+    		<id name="sid">
+    			<generator class="native"></generator>
+    		</id>
+    		<property name="userid"></property>
+    		<property name="stitle"></property>
+    		<property name="scontent"></property>
+    		<property name="sdate"></property>
+    		<property name="sfinishdate"></property>
+    		<property name="sflag"></property>
+    		<many-to-one name="user" class="com.edu.model.User" column="userid" insert="false" update="false"></many-to-one>
+    	</class>
+    </hibernate-mapping>

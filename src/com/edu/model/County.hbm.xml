@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    	<class name="com.edu.model.County" table="county">
+    		<id name="coid">
+    			<generator class="native"></generator>
+    		</id>
+    		<property name="coname"></property>
+    		<property name="cid"></property>
+			<many-to-one name="city" column="cid" class="com.edu.model.City" insert="false" update="false"></many-to-one>
+    		<set name="accountantapplies">
+    			<key column="countyid"></key>
+    			<one-to-many class="com.edu.model.Accountantapply"/>
+    		</set>
+    	</class>
+    </hibernate-mapping>

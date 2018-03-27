@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    
+    <class name="com.edu.model.User" table="user">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="loginname"></property>
+		<property name="name"></property>
+		<property name="password"></property>
+		<property name="sex"></property>
+		<property name="age"></property>
+		<property name="phone"></property>
+		<property name="usertype"></property>
+		<property name="status"></property>
+		<property name="organizationid"></property>
+		<property name="createtime"></property>
+		<property name="rid"></property>
+    
+    	
+    	<!-- 和role表的关系 -->
+    	<many-to-one name="role" class="com.edu.model.Role" column="rid" insert="false" update="false"></many-to-one>
+    	
+    	<!-- 和organiz表的关系 -->
+    	<many-to-one name="organization" class="com.edu.model.Organization" column="organizationid" insert="false" update="false"></many-to-one>
+    	
+    	<!-- 会计表 -->
+    	<set name="accountantapplies">
+    		<key column="userid"></key>
+    		<one-to-many class="com.edu.model.Accountantapply"/>
+    	</set>
+    	
+    	<!-- 艺考表 -->
+    	<set name="artapplies">
+    		<key column="userid"></key>
+    		<one-to-many class="com.edu.model.Artapply"/>
+    	</set>
+    	
+    	<!-- 职考表 -->
+    	<set name="professionapplies">
+    		<key column="userid"></key>
+    		<one-to-many class="com.edu.model.Professionapply"/>
+    	</set>
+    	
+    	    	<!-- 和adultapply表的关系 -->	
+    	<set name="adultapply" >  
+            <key column="userid" />  
+            <one-to-many class="com.edu.model.Adultapply"/>  
+        </set> 
+        
+        <!-- 和adultfinance表的关系 -->
+        <set name="adultfinance" >  
+            <key column="tid" />  
+            <one-to-many class="com.edu.model.Adultfinance"/>  
+        </set> 
+    	
+    	<!-- 和stateapply表的关系 -->	
+    	<set name="stateapply" >  
+            <key column="userid" />  
+            <one-to-many class="com.edu.model.Stateapply"/>  
+        </set>
+        
+        <!-- 和statefinance表的关系 -->
+         <set name="statefinance" >  
+            <key column="tid" />  
+            <one-to-many class="com.edu.model.Statefinance"/>  
+        </set> 
+        
+        
+        <!-- 和distanceapply表的关系 -->	
+    	<set name="distanceapply" >  
+            <key column="userid" />  
+            <one-to-many class="com.edu.model.Distanceapply"/>  
+        </set> 
+        
+         <!-- 和distancefinance表的关系 -->
+         <set name="distancefinance" >  
+            <key column="tid" />  
+            <one-to-many class="com.edu.model.Distancefinance"/>  
+        </set> 
+        
+        <!-- 和 accountantfinance表的关系  会计缴费表-->
+    	 <set name="accountantfinance" >  
+            <key column="tid" />  
+            <one-to-many class="com.edu.model.Accountantfinance"/>  
+        </set> 
+        
+        <!-- 和 professionfinance表的关系  会计缴费表-->
+    	 <set name="professionfinance" >  
+            <key column="tid" />  
+            <one-to-many class="com.edu.model.Professionfinance"/>  
+        </set> 
+        
+         <!-- 和artfinance表的关系  会计缴费表-->
+    	 <set name="artfinance" >  
+            <key column="tid" />  
+            <one-to-many class="com.edu.model.Artfinance"/>  
+        </set> 
+    	
+    	<!-- 和artfinance表的关系  会计缴费表-->
+    	 <set name="schedule" >  
+            <key column="userid" />  
+            <one-to-many class="com.edu.model.Schedule"/>  
+        </set> 
+    	
+    </class>
+    
+    
+    
+    </hibernate-mapping>
+    

@@ -1,0 +1,30 @@
+package com.edu.service.impl;
+
+import java.util.List;
+
+import com.edu.dao.impl.MinDaoImpl;
+import com.edu.service.MinService;
+
+public class MinServiceImpl implements MinService {
+	private MinDaoImpl minDao;
+
+	public MinDaoImpl getMinDao() {
+		return minDao;
+	}
+	public void setMinDao(MinDaoImpl minDao) {
+		this.minDao = minDao;
+	}
+	@Override
+	public List seldep(int pag,int row) {
+		// TODO Auto-generated method stub
+		List list = minDao.seldata(pag,row);
+		return list;
+	}
+	@Override
+	public int line() {
+		// TODO Auto-generated method stub
+		int i = minDao.selline();
+		return i;
+	}
+
+}

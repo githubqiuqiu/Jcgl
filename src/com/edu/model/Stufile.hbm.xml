@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    
+    <class name="com.edu.model.Stufile" table="stufile">
+    	<id name="sfid">
+    	<generator class="native"></generator>
+    	</id>
+    
+    	<property name="stuid"></property>
+    	<property name="stuname"></property>
+    	<property name="sfphoto"></property>
+    	<property name="sfvoucher"></property>
+    	<property name="sfpaper"></property>
+    	<property name="sfdate"></property>
+      
+    </class>
+
+    </hibernate-mapping>

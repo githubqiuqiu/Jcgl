@@ -1,0 +1,160 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 开启动态访问 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+	<package name="test" extends="struts-default">
+
+		<!-- 资料上传页面验证码 -->
+		<action name="authImg" class="com.ht.action.UserAction" method="list">
+			<result>contact01.jsp</result>
+		</action>
+
+		<!-- 资料上传类型1 -->
+		<action name="data" class="com.ht.action.UserAction" method="data">
+			<result>contact01.jsp</result>
+		</action>
+
+		<!-- 资料上传类型2 -->
+		<action name="data2" class="com.ht.action.UserAction1" method="data2">
+			<result>contact1.jsp</result>
+		</action>
+
+		<action name="department" class="com.edu.action.DepartmentAction">
+			<result>department.jsp</result>
+		</action>
+
+		<!-- 后台查询用户管理的信息 -->
+		<action name="findusermanagement" class="com.edu.action.FindUserManagementAction"
+			method="showlist">
+			<result></result>
+		</action>
+
+		<!-- 后台查询角色管理的信息 -->
+		<action name="findrole" class="com.edu.action.FindRoleAction">
+			<result></result>
+		</action>
+
+		<!-- 移除 登入后台的user session -->
+		<action name="removeuser" class="com.edu.action.RemoveUserAction">
+			<result>index.jsp</result>
+		</action>
+
+		<!-- 验证码 -->
+		<action name="yzm" class="com.edu.action.YzmAction">
+			<result></result>
+		</action>
+
+		<!-- 登入后台 -->
+		<action name="SignUp" class="com.edu.action.SignUpAction">
+			<result>ht/backstage.jsp</result>
+			<result name="error">login.jsp</result>
+		</action>
+
+		<!-- 登录前判断是否登入过 -->
+		<action name="beforelogin" class="com.edu.action.BeforeLoginAction">
+			<result>ht/backstage.jsp</result>
+			<result name="login">login.jsp</result>
+		</action>
+
+		<!-- 添加角色管理信息 -->
+		<action name="addrole" class="com.edu.action.AddAction" method="addrole">
+			<result>role.jsp</result>
+		</action>
+
+
+		<!-- 添加用户管理信息 -->
+		<action name="adduser" class="com.edu.action.AddAction" method="adduser">
+			<result>usermanagement.jsp</result>
+		</action>
+
+		<!-- 添加部门管理信息 -->
+		<action name="adddep" class="com.edu.action.AddAction" method="adddep">
+			<result>department.jsp</result>
+		</action>
+
+		<!-- 删除角色管理信息 -->
+		<action name="delrole" class="com.edu.action.DelAction" method="delrole">
+			<result></result>
+		</action>
+
+		<!-- 删除部门管理信息 -->
+		<action name="delorg" class="com.edu.action.DelAction" method="delorg">
+			<result></result>
+		</action>
+
+		<!-- 重置用户密码 -->
+		<action name="resertpwd" class="com.edu.action.ResertAction"
+			method="resertpwd">
+			<result></result>
+		</action>
+
+		<!-- role表的编辑 先查询信息 -->
+		<action name="beforeroleedit" class="com.edu.action.BeforeEditAction"
+			method="beforeroleedit">
+			<result>../htinclude/roleedit.jsp</result>
+		</action>
+
+		<!-- role表编辑 -->
+		<action name="editrole" class="com.edu.action.EditAction"
+			method="editrole">
+			<result></result>
+		</action>
+
+		<!-- user表的编辑 先查询信息 -->
+		<action name="beforeuseredit" class="com.edu.action.BeforeEditAction"
+			method="beforeuseredit">
+			<result>../htinclude/useredit.jsp</result>
+		</action>
+
+		<!-- user表的编辑 -->
+		<action name="editusers" class="com.edu.action.EditAction"
+			method="edituser">
+			<result></result>
+		</action>
+
+		<!-- organization表的编辑 先查询信息 -->
+		<action name="beforedepedit" class="com.edu.action.BeforeEditAction"
+			method="beforedepedit">
+			<result>../htinclude/depedit.jsp</result>
+		</action>
+
+		<!-- organization表的编辑 -->
+		<action name="editdep" class="com.edu.action.EditAction"
+			method="editdep">
+			<result></result>
+		</action>
+
+		<!--专业管理查询 -->
+		<action name="selmajor" class="com.edu.action.MajorAction"
+			method="sel">
+			<result>major.jsp</result>
+		</action>
+
+		<!-- 专业管理添加 -->
+		<action name="addmajor" class="com.edu.action.MajorAction"
+			method="add">
+			<result>major.jsp</result>
+		</action>
+
+		<!-- 专业管理查询当前要修改的专业 -->
+		<action name="editmajor" class="com.edu.action.MajorAction"
+			method="editsel">
+			<result>../htinclude/editmajor.jsp</result>
+		</action>
+
+		<!-- 专业管理修改当前编辑的值 -->
+		<action name="edit" class="com.edu.action.MajorAction" method="edit">
+			<result>../ht/major.jsp</result>
+		</action>
+
+		<!-- 专业管理删除当前选中的值 -->
+		<action name="del" class="com.edu.action.MajorAction" method="del">
+			<result>major.jsp</result>
+		</action>
+
+	</package>
+
+</struts>

@@ -1,0 +1,150 @@
+package com.edu.action;
+
+import java.io.PrintWriter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.edu.model.User;
+import com.edu.service.QiuService;
+import com.google.gson.Gson;
+
+import com.opensymphony.xwork2.ActionSupport;
+
+public class SignUpAction extends ActionSupport{
+	private User user;
+	private String yzm;
+	private QiuService qiuService;
+	private List<User> list;
+	private String result;
+	
+
+	
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+	public String getYzm() {
+		return yzm;
+	}
+
+
+
+	public void setYzm(String yzm) {
+		this.yzm = yzm;
+	}
+
+	
+
+
+
+
+	public QiuService getQiuService() {
+		return qiuService;
+	}
+
+
+
+	public void setQiuService(QiuService qiuService) {
+		this.qiuService = qiuService;
+	}
+
+
+
+	public List<User> getList() {
+		return list;
+	}
+
+
+
+	public void setList(List<User> list) {
+		this.list = list;
+	}
+
+
+
+	public String getResult() {
+		return result;
+	}
+
+
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+
+
+	@Override
+	public String execute() throws Exception {
+		System.out.println("进了sign");
+		/*System.out.println(user.getLoginname());
+		System.out.println(user.getPassword());
+		System.out.println(yzm);*/
+		
+		
+		HttpServletResponse res=ServletActionContext.getResponse();
+		HttpServletRequest req=ServletActionContext.getRequest();
+		HttpSession session=req.getSession();
+		res.setCharacterEncoding("utf-8");
+		req.setCharacterEncoding("utf-8");
+		
+		
+		//获得验证码
+		String getyzm=(String) session.getAttribute("verCode");
+		//查询账号是否存在
+		List<User> list1=new ArrayList<>();
+		list1=qiuService.findUser(user.getLoginname());
+		System.out.println("list1="+list1);
+		
+		System.out.println( "session"+session.getAttribute("user"));
+		
+			//判断验证码大小写都可以
+			if(yzm.equals(getyzm.toLowerCase())||yzm.equals(getyzm.toUpperCase())){
+				System.out.println("验证码正确");
+				//判断账号是否存在
+				if(list1 != null && list1.size() > 0){//账号存在
+					System.out.println("账号存在");
+					//判断账号密码是否一致
+					list=qiuService.selectUser(user.getLoginname(), user.getPassword());
+					System.out.println("list="+list);
+					if(list != null && list.size() > 0){//登录成功
+						System.out.println("账号密码一致");
+						
+						//保存登录用户到session
+						session.setAttribute("user", user);
+						return SUCCESS;
+					}else {
+						req.setAttribute("mmmsg", "密码不正确");
+						return ERROR;
+					}
+					
+				}
+				else{//账号不存在
+					req.setAttribute("zhmsg", "账号不存在");
+					return ERROR;
+				}
+				
+			}
+			else{//验证码不正确
+				req.setAttribute("yzmmsg", "验证码不正确");
+				return ERROR;
+			}
+		}
+		
+		 
+}

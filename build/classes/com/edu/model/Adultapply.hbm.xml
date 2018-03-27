@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    
+    <class name="com.edu.model.Adultapply" table="adultapply">
+		<id name="aid">
+			<generator class="native"></generator>
+		</id>
+		<property name="astudentno"></property>
+		<property name="aname"></property>
+		<property name="userid"></property>
+		<property name="idnumber"></property>
+		<property name="aphone"></property>
+		<property name="atype"></property>
+		<property name="acaid"></property>
+		<property name="specid"></property>
+		<property name="agradation"></property>
+		<property name="asystem"></property>
+		<property name="cityid"></property>
+    	<property name="countyid"></property>
+		<property name="adata"></property>
+    	
+    	<!-- 和user表的关系 -->
+    	<many-to-one name="user" class="com.edu.model.User" column="userid" insert="false" update="false"></many-to-one>
+    	
+    	<!-- 和academy表的关系 -->
+    	<many-to-one name="academy" class="com.edu.model.Academy" column="acaid" insert="false" update="false"></many-to-one>
+    	
+    	<!-- 和specialty表的关系 -->
+    	<many-to-one name="specialty" class="com.edu.model.Specialty" column="specid" insert="false" update="false"></many-to-one>
+    	
+    	<!-- 和city表的关系 -->
+    	<many-to-one name="city" class="com.edu.model.City" column="cityid" insert="false" update="false"></many-to-one>
+    	
+    	<!-- 和county表的关系 -->
+    	<many-to-one name="county" class="com.edu.model.County" column="countyid" insert="false" update="false"></many-to-one>
+    	
+    </class>
+    
+    
+    </hibernate-mapping>

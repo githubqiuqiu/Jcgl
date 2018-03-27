@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<s:include value="link.jsp"></s:include>
+<script type="text/javascript">
+function sub() {
+	var sm = $("#sm").val();
+	var dh = $("#dh").val();
+	var nr = $("#nr").val();
+	var cs = $("#sel1").val();
+	var xc = $("#sel2").val();
+	var rq = $("#rq").val();
+	
+	if(sm==""){
+		$("#msg").html("<font color='red'>姓名为空</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else if(dh==""){
+		$("#msg").html("<font color='red'>电话为空</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else if(isNaN(dh)){
+		$("#msg").html("<font color='red'>请输入正确的号码</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else if(dh.length!=11){
+		$("#msg").html("<font color='red'>请输入正确的号码</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else if(nr==""){
+		$("#msg").html("<font color='red'>学习内容为空</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else if(cs==""){
+		$("#msg").html("<font color='red'>城市为空</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else if(xc==""){
+		$("#msg").html("<font color='red'>县城为空</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else if(rq==""){
+		$("#msg").html("<font color='red'>日期为空</font>");
+		setTimeout("$('#msg').html('');",2000);
+	}else{
+		if(rq.trim()==""){
+			$("#msg").html("<font color='red'>请输入日期</font>");
+			setTimeout("$('#msg').html('');",2000);
+			return;
+		}
+			var r=rq.match(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/); 
+		    if(r==null){
+		      alert("请输入格式正确的日期\n\r日期格式：yyyy-mm-dd\n\r例    如：2008-08-08\n\r");
+		      return;
+		    }
+		    var d=new Date(r[1],r[3]-1,r[4]);   
+		    var num = (d.getFullYear()==r[1]&&(d.getMonth()+1)==r[3]&&d.getDate()==r[4]);
+		    if(num==0){
+		      alert("请输入格式正确的日期\n\r日期格式：yyyy-mm-dd\n\r例    如：2008-08-08\n\r");
+		      return;
+		    }
+ 			$("#su").submit();
+	}
+}
+	$(function(){
+		$("#s1").combobox({
+			onChange: function (n,o) {
+				var cid=$("#s1").val();
+				//当改变了院校  清空专业表的值
+				$("#s2 option").remove();
+				
+				$('#s2').combobox({
+					valueField:'coid', //值字段
+			        textField:'coname', //显示的字段
+			        url:'selcounty1?cityid='+cid+'',
+			        panelHeight:'auto',
+			        required:true,
+			        editable:true,//不可编辑，只能选择  
+			     });
+			}
+		});
+	});
+</script>
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'center',split:true" style="height:200px">
+		<form  action="accountedit" method="post" id="su">
+		<input type="hidden" name="abean.aid" value="${abean.aid }"/>
+		<input type="hidden" name="abean.id" value="${abean.id }"/>
+			姓名：<input type="text" class="easyui-textbox" name="abean.aname" value="${abean.aname}" id="sm"/>&nbsp;&nbsp;&nbsp;&nbsp;学号：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="easyui-textbox" name="abean.astudentno" value="${abean.astudentno}" readonly="readonly"/><br/>
+			<br/>电话：<input type="text" class="easyui-textbox" name="abean.aphone" value="${abean.aphone}" id="dh"/>&nbsp;&nbsp;&nbsp;&nbsp;学习内容：<input type="text" class="easyui-textbox" name="abean.acontent" value="${abean.acontent}" id="nr"/><br/>
+			<br/>所属城市：<select id="s1" class="easyui-combobox" name="abean.cid" style="width:80px"
+			>
+				<s:iterator value="citylist">
+					<option value="${cid }" ${cid==abean.cid?'selected':'' }>${cname }</option>
+				</s:iterator>
+			</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所属地区：<select id="s2" class="easyui-combobox" name="abean.coid" style="width:80px">
+				<s:iterator value="countylist">
+					<option value="${coid }" ${coid==abean.coid?'selected':'' }>${coname }</option>
+				</s:iterator>
+			</select><br/>
+			<br/>报名日期：<input type="text" class="easyui-datebox" name="abean.adata" value="${abean.adata}" id="rq"/>&nbsp;&nbsp;&nbsp;&nbsp;
+			老师：<input type="text" class="easyui-textbox" name="abean.name" value="${abean.name}" readonly="readonly" id="ls"/>
+		</form>
+	</div>
+	<div data-options="region:'north',split:true">
+		<div align="right">
+		<hr/>
+		<span id="msg"></span>
+			<a class="easyui-linkbutton" onclick="sub()">修改</a>
+		</div>
+	</div>
+	
+</body>
+</html>

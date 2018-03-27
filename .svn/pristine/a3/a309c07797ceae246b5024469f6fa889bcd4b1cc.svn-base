@@ -1,0 +1,162 @@
+package com.edu.action;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.alibaba.fastjson.JSON;
+import com.edu.bean.UserBean;
+import com.edu.model.Organization;
+import com.edu.model.Role;
+import com.edu.model.User;
+import com.edu.service.QiuService;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class FindUserManagementAction extends ActionSupport{
+	private QiuService qiuService;
+	private List list;
+	private Integer listcount;
+	private Map map;
+	private String json;
+	
+
+	public List getList() {
+		return list;
+	}
+
+	public void setList(List list) {
+		this.list = list;
+	}
+
+	public String getJson() {
+		return json;
+	}
+
+	public void setJson(String json) {
+		this.json = json;
+	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public void setMap(Map map) {
+		this.map = map;
+	}
+
+	public Integer getListcount() {
+		return listcount;
+	}
+
+	public void setListcount(Integer listcount) {
+		this.listcount = listcount;
+	}
+
+	
+	
+	public QiuService getQiuService() {
+		return qiuService;
+	}
+
+	public void setQiuService(QiuService qiuService) {
+		this.qiuService = qiuService;
+	}
+
+	//循环遍历账号密码
+	public String showlist(){
+		
+		HttpServletResponse res=ServletActionContext.getResponse();
+		HttpServletRequest req=ServletActionContext.getRequest();
+		res.setCharacterEncoding("utf-8");
+		
+		String uname=req.getParameter("uname");
+
+		String page = req.getParameter("page");
+		String rows = req.getParameter("rows");
+		int i1=Integer.parseInt(page);
+		int i2=Integer.parseInt(rows);
+		System.out.println("i1="+i1);
+		System.out.println("i2="+i2);
+		
+		
+		if(uname.equals("")||uname==null) {//没有模糊查询 查询全部
+			//返回总数据
+			list=qiuService.showlist(i1,i2);
+			listcount=list.size();
+		}else {//有模糊查询
+			//总数据
+			list=qiuService.showlistbyname(i1, i2, uname);
+			//总数据条数
+			listcount=list.size();
+		}
+		
+		//返回数据条数
+		//listcount=qiuService.listcount();
+		
+		if(list!=null) {
+			System.out.println("list="+list);
+			System.out.println("listcount="+listcount);
+			
+			
+			List<UserBean> list1 = new ArrayList<>();
+			for (int i = 0; i < list.size(); i++) {
+				Object[] object = (Object[])list.get(i);
+				User user = new User();
+				Role role = new Role();
+				Organization org = new Organization();
+				UserBean bean = new UserBean();
+				user= (User)object[0];
+				role = (Role)object[1];
+				org = (Organization)object[2];
+						
+				
+				bean.setId(user.getId());
+				bean.setLoginname(user.getLoginname());
+				bean.setName(user.getName());
+				bean.setPassword(user.getPassword());
+				bean.setSex(user.getSex());
+				bean.setAge(user.getAge());
+				bean.setPhone(user.getPhone());
+				bean.setUsertype(user.getUsertype());
+				bean.setStatus(user.getStatus());
+				bean.setCreatetime(user.getCreatetime());
+				bean.setOrganizationname(org.getName());
+				bean.setRname(role.getName());
+				list1.add(bean);
+				System.out.println(object.length);
+			
+			}
+				
+			map=new HashMap<>();
+			map.put("total", listcount);
+			map.put("rows", list1);
+		
+			json=JSON.toJSONString(map);//把map转换成json格式
+			System.out.println("json格式:"+json);
+			
+			try {
+				PrintWriter pw=res.getWriter();
+				pw.println(json);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			return null;
+		}
+		else{
+			return null;
+		}
+		
+		
+		
+	}
+	
+
+}

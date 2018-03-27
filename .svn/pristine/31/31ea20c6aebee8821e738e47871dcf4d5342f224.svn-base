@@ -1,0 +1,185 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<!-- 引入JQuery -->
+ <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.min.js"></script>
+ <!-- 引入EasyUI -->
+ <script type="text/javascript" src="jquery-easyui-1.5.2/jquery.easyui.min.js"></script>
+ <!-- 引入EasyUI的中文国际化js，让EasyUI支持中文 -->
+ <script type="text/javascript" src="jquery-easyui-1.5.2/locale/easyui-lang-zh_CN.js"></script>
+ <!-- 引入EasyUI的样式文件-->
+ <link rel="stylesheet" href="jquery-easyui-1.5.2/themes/default/easyui.css" type="text/css"/>
+ <!-- 引入EasyUI的图标样式文件-->
+ <link rel="stylesheet" href="jquery-easyui-1.5.2/themes/icon.css" type="text/css"/>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+	$(function(){
+		$('#calendar').calendar({
+		    current:new Date(),
+		    weeks:['星期天','星期一','星期二','星期三','星期四','星期五','星期六'],
+		    months:['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+		});
+	    $('#tabs').tabs({
+	    	tools:[
+	    	{
+	    		iconCls:'icon-add',
+	    		handler:function(){
+	    			alert('add')
+	    		}
+	    	},{
+	    		iconCls:'icon-reload',
+	    		handler:function(){
+	    			alert('save')
+	    		}
+	    	},{
+	    		iconCls:'icon-remove',
+	    		handler:function(){
+	    			alert('save')
+	    		}
+	    	}
+	    	
+	    	]
+	    });
+	});
+    function addTab(title, url){
+    	if ($('#tabs').tabs('exists', title)){
+    		$('#tabs').tabs('select', title);
+    	} else {
+    		var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+    		$('#tabs').tabs('add',{
+    			title:title,
+    			content:content,
+    			closable:true,
+    		});
+    	}
+    }
+	</script>
+	
+	<style type="text/css">
+a{
+	text-decoration: none;
+}
+	
+</style>
+	
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'north'"
+		style="height: 62px">
+			
+	 <table height="60px">
+		<tr>
+		<td width="800px"><img alt="" src="imgs/1.png"></td>
+		<td valign="bottom">
+				
+		<div>
+                <span style="float: right; padding-right: 20px; margin-top: 15px; color: #333">
+                 
+          	       欢迎您:<b> ${user.loginname }</b>&nbsp;&nbsp; 
+                    <a href="javascript:void(0)" onclick="editUserPwd()" class="easyui-linkbutton" plain="true" icon="icon-lock" >修改密码</a>
+                    &nbsp;&nbsp;
+                    <a href="removeuser" class="easyui-linkbutton" plain="true" icon="icon-no">安全退出</a>
+                    <a href="index.jsp" class="easyui-linkbutton" plain="true" icon="icon-no">回到首页</a>
+                </span>
+                <span class="header"></span>
+            </div>
+		
+		</td>
+		</tr>
+	</table> 	
+		
+	
+		
+			
+		</div>
+		
+		
+	<div data-options="region:'west',title:'菜单'"
+		style="width: 150px" >
+		<ul id="tt" class="easyui-tree" animate="true" dnd="true" lines="true">
+			<li data-options="state:'closed'"><span>权限管理</span>
+				<ul>
+					<li><a href="#" onclick="addTab('角色管理','ht/role.jsp')">角色管理</a></li>
+					<li><a href="#" onclick="addTab('用户管理','ht/usermanagement.jsp')">用户管理</a></li>
+					<li><a href="#" onclick="addTab('部门管理','ht/department.jsp')">部门管理</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>报名管理</span>
+				<ul >
+					<li><a href="#" onclick="addTab('成考报名','index.jsp')">成考报名</a></li>
+					<li><a href="#" onclick="addTab('会计报名','index.jsp')">会计报名</a></li>
+					<li><a href="#" onclick="addTab('国家开放报名','index.jsp')">国家开放报名</a></li>
+					<li><a href="#" onclick="addTab('远程报名','index.jsp')">远程报名</a></li>
+					<li><a href="#" onclick="addTab('艺考报名','index.jsp')">艺考报名</a></li>
+					<li><a href="#" onclick="addTab('职业资格报名','index.jsp')">职业资格报名</a></li>
+					<li><a href="#" onclick="addTab('文件上传','index.jsp')">文件上传</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>专业管理</span>
+				<ul >
+					<li><a href="#" onclick="addTab('专业管理','ht/major.jsp')">专业管理</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>热门专业</span>
+				<ul >
+					<li><a href="#" onclick="addTab('热门专业','index.jsp')">热门专业</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>招生简章</span>
+				<ul >
+					<li><a href="#" onclick="addTab('招生简章','index.jsp')">招生简章</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>日志监控</span>
+				<ul >
+					<li><a href="#" onclick="addTab('登陆日子','index.jsp')">登陆日志</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>系统设置</span>
+				<ul >
+					<li><a href="#" onclick="addTab('共享管理','index.jsp')">共享管理</a></li>
+					<li><a href="#" onclick="addTab('联系方式','index.jsp')">联系方式</a></li>
+					<li><a href="#" onclick="addTab('公告管理','index.jsp')">公告管理</a></li>
+					<li><a href="#" onclick="addTab('首页内容','index.jsp')">首页内容</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>工作助手</span>
+				<ul>
+					<li><a href="#" onclick="addTab('工作提醒','index.jsp')">工作提醒</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>财务管理</span>
+				<ul>
+					<li><a href="#" onclick="addTab('成考缴费','index.jsp')">成考缴费</a></li>
+					<li><a href="#" onclick="addTab('会计缴费','index.jsp')">会计缴费</a></li>
+					<li><a href="#" onclick="addTab('国家开放缴费','index.jsp')">国家开放缴费</a></li>
+					<li><a href="#" onclick="addTab('远程缴费','index.jsp')">远程缴费</a></li>
+					<li><a href="#" onclick="addTab('艺考缴费','index.jsp')">艺考缴费</a></li>
+					<li><a href="#" onclick="addTab('职业资格缴费','index.jsp')">职业资格缴费</a></li>
+				</ul>
+			</li>
+			<li data-options="state:'closed'"><span>报表管理</span>
+			
+			<ul>
+					<li><a href="#" onclick="addTab('报表查询','index.jsp')">报表查询</a></li>
+				</ul>
+			
+			
+			</li>
+		</ul>
+	</div>
+	<div data-options="region:'center'">
+    	<div id="tabs" class="easyui-tabs"  fit="true" style="background-color: #eee;">
+			<div title="首 页" style="padding: 20px; display: none;">
+				<div id="calendar" style="width:450px;height:450px;"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="s" uri="/struts-tags" %>    
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<s:include value="link.jsp"></s:include>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+//提交编辑按钮
+function editrole(){
+	 $('#winedit').window('close');
+	 $.ajax({
+		 async:true,
+	 	 cache:true,
+	 	 url:'editrole',
+	 	 type:'post',
+	 	 data:$('#editfrom').serialize(),
+	 	 datatype:'json',
+	 	 success:function(result){
+			add();
+	 	 },
+	 	 error:function(XMLHttpRequest,textStatus){
+	 		 alert($('#editfrom').serialize());
+	 		 alert("错误");
+	 	 }
+	 });
+	
+}
+
+
+</script>
+
+</head>
+<body>
+	
+	<form method="post" action="editrole" id="editfrom" >
+	<input name="role.id" value="${role.id }"   type="hidden" id="roleid" >
+	<table class="grid">
+                <tr>
+                
+                    <td>角色名称</td>
+                    <td>
+                    <input name="role.name"  value="${role.name}"  id="rolename" type="text" placeholder="请输入角色名称" class="easyui-validatebox"></td>
+                </tr>
+                <tr>
+                    <td>排序</td>
+                    <td><input type="text" value="${role.seq}"   id="roleseq" name="role.seq"></td>
+                </tr>
+                <tr>
+                    <td>状态</td>
+                    <td >
+              		 
+                        <select id="rolestatus" value="${role.status}"  name="role.status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                            <option value="0"  ${role.status=='0'?'selected':'' }  >正常</option>
+                            <option value="1"  ${role.status=='1'?'selected':'' }>停用</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td colspan="3"><textarea   name="role.description" id="roledescription">${role.description }</textarea></td>
+                </tr>
+            </table>
+            
+            <div align="center"><a href="#" onclick="editrole()" class="easyui-linkbutton" icon="icon-ok">Ok</a></div>
+         </form>   
+			
+</body>
+</html>

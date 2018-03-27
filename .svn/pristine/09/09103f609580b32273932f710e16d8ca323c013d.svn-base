@@ -1,0 +1,87 @@
+package com.edu.action;
+
+import java.util.Date;
+
+import com.edu.model.Organization;
+import com.edu.model.Role;
+import com.edu.model.User;
+import com.edu.service.QiuService;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class AddAction extends ActionSupport{
+	private Role role;
+	private User user;
+	private Organization organization;
+	private QiuService qiuService;
+	
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+
+	public QiuService getQiuService() {
+		return qiuService;
+	}
+
+
+
+	public void setQiuService(QiuService qiuService) {
+		this.qiuService = qiuService;
+	}
+
+
+
+	public Role getRole() {
+		return role;
+	}
+
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+
+
+	
+	public String addrole() {
+		//保存角色管理信息到数据库
+		qiuService.addrole(role);
+		return SUCCESS;
+	}
+	
+	public String adduser() {
+		//保存用户管理信息到数据库
+		user.setCreatetime(new Date().toLocaleString());
+		System.out.println("部门id="+user.getOrganizationid());
+		System.out.println("角色id="+user.getRid());
+		qiuService.adduser(user);
+		return SUCCESS;
+	}
+	
+	public String adddep() {
+		organization.setCreatetime(new Date().toLocaleString());
+		qiuService.adddep(organization);
+		return SUCCESS;
+	}
+	
+}

@@ -1,0 +1,1407 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 开启动态访问 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+	<package name="test" extends="struts-default">
+
+		
+		<action name="department" class="com.edu.action.DepartmentAction">
+			<result>department.jsp</result>
+		</action>
+
+		<!-- 后台查询用户管理的信息 -->
+		<action name="findusermanagement" class="com.edu.action.FindUserManagementAction"
+			method="showlist">
+			<result></result>
+		</action>
+
+		<!-- 后台查询角色管理的信息 -->
+		<action name="findrole" class="com.edu.action.FindRoleAction">
+			<result></result>
+		</action>
+
+		<!-- 移除 登入后台的user session -->
+		<action name="removeuser" class="com.edu.action.RemoveUserAction">
+			<result type="redirect">index.action</result>
+		</action>
+
+		<!-- 验证码 -->
+		<action name="yzm" class="com.edu.action.YzmAction">
+			<result></result>
+		</action>
+
+		<!-- 登入后台 -->
+		<action name="SignUp" class="com.edu.action.SignUpAction">
+			<result></result>
+		</action>
+
+		<!-- 进入后台 -->
+		<action name="Backstage" class="com.edu.action.SignUpAction"
+			method="tobackstage">
+			<result>ht/backstage.jsp</result>
+		</action>
+
+		<!-- 登录前判断是否登入过 -->
+		<action name="beforelogin" class="com.edu.action.BeforeLoginAction">
+			<result>ht/backstage.jsp</result>
+			<result name="login">login.jsp</result>
+		</action>
+
+		<!-- 添加角色管理信息 -->
+		<action name="addrole" class="com.edu.action.AddAction" method="addrole">
+			<result>role.jsp</result>
+		</action>
+
+
+		<!-- 添加用户管理信息 -->
+		<action name="adduser" class="com.edu.action.AddAction" method="adduser">
+			<result>usermanagement.jsp</result>
+		</action>
+
+		<!-- 添加部门管理信息 -->
+		<action name="adddep" class="com.edu.action.AddAction" method="adddep">
+			<result>department.jsp</result>
+		</action>
+
+		<!-- 删除角色管理信息 -->
+		<action name="delrole" class="com.edu.action.DelAction" method="delrole">
+			<result></result>
+		</action>
+
+		<!-- 删除部门管理信息 -->
+		<action name="delorg" class="com.edu.action.DelAction" method="delorg">
+			<result></result>
+		</action>
+
+		<!-- 重置用户密码 -->
+		<action name="resertpwd" class="com.edu.action.ResertAction"
+			method="resertpwd">
+			<result></result>
+		</action>
+
+		<!-- role表的编辑 先查询信息 -->
+		<action name="beforeroleedit" class="com.edu.action.BeforeEditAction"
+			method="beforeroleedit">
+			<result>../htinclude/roleedit.jsp</result>
+		</action>
+
+		<!-- role表编辑 -->
+		<action name="editrole" class="com.edu.action.EditAction"
+			method="editrole">
+			<result></result>
+		</action>
+
+		<!-- user表的编辑 先查询信息 -->
+		<action name="beforeuseredit" class="com.edu.action.BeforeEditAction"
+			method="beforeuseredit">
+			<result>../htinclude/useredit.jsp</result>
+		</action>
+
+		<!-- user表的编辑 -->
+		<action name="editusers" class="com.edu.action.EditAction"
+			method="edituser">
+			<result></result>
+		</action>
+
+		<!-- organization表的编辑 先查询信息 -->
+		<action name="beforedepedit" class="com.edu.action.BeforeEditAction"
+			method="beforedepedit">
+			<result>../htinclude/depedit.jsp</result>
+		</action>
+
+		<!-- organization表的编辑 -->
+		<action name="editdep" class="com.edu.action.EditAction"
+			method="editdep">
+			<result></result>
+		</action>
+
+		<!--专业管理查询 -->
+		<action name="selmajors" class="com.edu.action.MajorAction"
+			method="sel">
+			<result>major.jsp</result>
+		</action>
+
+		<!-- 专业管理添加 -->
+		<action name="addmajor" class="com.edu.action.MajorAction"
+			method="add">
+			<result>major.jsp</result>
+		</action>
+
+		<!-- 专业管理查询当前要修改的专业 -->
+		<action name="editmajor" class="com.edu.action.MajorAction"
+			method="editsel">
+			<result>../htinclude/editmajor.jsp</result>
+		</action>
+
+		<!-- 专业管理修改当前编辑的值 -->
+		<action name="edit" class="com.edu.action.MajorAction" method="edit">
+			<result>../ht/major.jsp</result>
+		</action>
+
+		<!-- 专业管理删除当前选中的值 -->
+		<action name="del" class="com.edu.action.MajorAction" method="del">
+			<result>major.jsp</result>
+		</action>
+
+		<!-- 会计报名查询 -->
+		<action name="selaccount" class="com.edu.action.AccoAction"
+			method="sel">
+			<result>accountant.jsp</result>
+		</action>
+
+		<!-- 会计编辑查询当前选中的值 -->
+		<action name="seledit" class="com.edu.action.AccoAction"
+			method="seledit">
+			<result>../htinclude/editaccount.jsp</result>
+		</action>
+
+		<!-- 会计编辑城市改变查询县城 -->
+		<action name="selcounty1" class="com.edu.action.AccoAction"
+			method="selcounty">
+			<result>../htinclude/editaccount.jsp</result>
+		</action>
+
+		<!-- 会计编辑后台修改 -->
+		<action name="accountedit" class="com.edu.action.AccoAction"
+			method="edit">
+			<result>../ht/accountant.jsp</result>
+		</action>
+
+		<!-- 会计删除当前选中学生 -->
+		<action name="delaccount" class="com.edu.action.AccoAction"
+			method="del">
+			<result>../ht/accountant.jsp</result>
+		</action>
+
+		<!-- 会计添加中学生之前查询所有城市 -->
+		<action name="accountindex" class="com.edu.action.AccoAction"
+			method="beforeadd">
+			<result>../htinclude/accountindex.jsp</result>
+		</action>
+
+		<!-- 会计添加中学生 -->
+		<action name="accountadd" class="com.edu.action.AccoAction"
+			method="add">
+			<result>../ht/accountant.jsp</result>
+		</action>
+
+		<!-- 会计模糊查询先查询city -->
+		<action name="accountant" class="com.edu.action.AccoAction"
+			method="selcity">
+			<result>../ht/accountant.jsp</result>
+		</action>
+
+		<!-- 热门专业查询 -->
+		<action name="selhotmajor" class="com.edu.action.HotmajorAction"
+			method="sel">
+			<result></result>
+		</action>
+
+		<!-- 热门专业添加 -->
+		<action name="addhotmajor" class="com.edu.action.HotmajorAction"
+			method="add">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/hotmajor.jsp</result>
+		</action>
+
+		<!-- 热门专业编辑查询 -->
+		<action name="hotmajoreditsel" class="com.edu.action.HotmajorAction"
+			method="editsel">
+			<result>../htinclude/edithotmajor.jsp</result>
+		</action>
+
+		<!-- 热门专业编辑修改 -->
+		<action name="hotmajoredit" class="com.edu.action.HotmajorAction"
+			method="edit">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/hotmajor.jsp</result>
+		</action>
+
+		<!-- 热门专业删除 -->
+		<action name="delhotmajor" class="com.edu.action.HotmajorAction"
+			method="del">
+			<result>../ht/hotmajor.jsp</result>
+		</action>
+
+		<!-- 招生简介查询 -->
+		<action name="seleguide" class="com.edu.action.EguideAction"
+			method="sel">
+			<result>../ht/eguide.jsp</result>
+		</action>
+
+		<!-- 招生简介添加 -->
+		<action name="addeguide" class="com.edu.action.EguideAction"
+			method="add">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/eguide.jsp</result>
+		</action>
+
+		<!-- 招生简介删除 -->
+		<action name="deleguide" class="com.edu.action.EguideAction"
+			method="del">
+			<result>../ht/eguide.jsp</result>
+		</action>
+
+		<!-- 招生简介编辑查询 -->
+		<action name="eguideeditsel" class="com.edu.action.EguideAction"
+			method="editsel">
+			<result>../htinclude/editeguide.jsp</result>
+		</action>
+
+		<!-- 招生简介编辑 -->
+		<action name="editeguide" class="com.edu.action.EguideAction"
+			method="edit">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/eguide.jsp</result>
+		</action>
+
+		<!-- 共享管理查询 -->
+		<action name="selshare" class="com.edu.action.ShareAction"
+			method="sel">
+			<result>../ht/share.jsp</result>
+		</action>
+
+		<!-- 共享管理添加 -->
+		<action name="addshare" class="com.edu.action.ShareAction"
+			method="add">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/share.jsp</result>
+		</action>
+
+		<!-- 共享管理删除 -->
+		<action name="delshare" class="com.edu.action.ShareAction"
+			method="del">
+			<result>../ht/share.jsp</result>
+		</action>
+
+		<!-- 共享管理编辑查询 -->
+		<action name="shareeditsel" class="com.edu.action.ShareAction"
+			method="editsel">
+			<result>../htinclude/editshare.jsp</result>
+		</action>
+
+		<!-- 共享管理编辑 -->
+		<action name="editshare" class="com.edu.action.ShareAction"
+			method="edit">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/share.jsp</result>
+		</action>
+
+		<!-- 联系方式查询 -->
+		<action name="selrelation" class="com.edu.action.RelationAction"
+			method="sel">
+			<result>../ht/relation.jsp</result>
+		</action>
+
+		<!-- 联系方式添加 -->
+		<action name="addrelation" class="com.edu.action.RelationAction"
+			method="add">
+			<result>../ht/relation.jsp</result>
+		</action>
+
+		<!-- 联系方式删除 -->
+		<action name="delrelation" class="com.edu.action.RelationAction"
+			method="del">
+			<result>../ht/relation.jsp</result>
+		</action>
+
+		<!-- 联系方式编辑查询 -->
+		<action name="relationeditsel" class="com.edu.action.RelationAction"
+			method="editsel">
+			<result>../htinclude/editrelation.jsp</result>
+		</action>
+
+		<!-- 联系方式编辑 -->
+		<action name="editrelation" class="com.edu.action.RelationAction"
+			method="edit">
+			<result>../ht/relation.jsp</result>
+		</action>
+
+		<!-- 公告管理查询 -->
+		<action name="selnotice" class="com.edu.action.NoticeAction"
+			method="sel">
+			<result>../ht/notice.jsp</result>
+		</action>
+
+		<!-- 公告管理添加 -->
+		<action name="addnotice" class="com.edu.action.NoticeAction"
+			method="add">
+			<result>../ht/notice.jsp</result>
+		</action>
+
+		<!-- 公告管理删除 -->
+		<action name="delnotice" class="com.edu.action.NoticeAction"
+			method="del">
+			<result>../ht/notice.jsp</result>
+		</action>
+
+		<!-- 公告管理编辑查询 -->
+		<action name="noticeeditsel" class="com.edu.action.NoticeAction"
+			method="editsel">
+			<result>../htinclude/editnotice.jsp</result>
+		</action>
+
+		<!-- 公告管理编辑 -->
+		<action name="editnotice" class="com.edu.action.NoticeAction"
+			method="edit">
+			<result>../ht/notice.jsp</result>
+		</action>
+
+		<!-- 首页内容查询 -->
+		<action name="selhome" class="com.edu.action.HomeAction"
+			method="sel">
+			<result>../ht/homecontent.jsp</result>
+		</action>
+
+		<!-- 首页内容添加 -->
+		<action name="addhome" class="com.edu.action.HomeAction"
+			method="add">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/homecontent.jsp</result>
+		</action>
+
+		<!-- 首页内容删除 -->
+		<action name="delhome" class="com.edu.action.HomeAction"
+			method="del">
+			<result>../ht/homecontent.jsp</result>
+		</action>
+
+		<!-- 首页内容编辑查询 -->
+		<action name="homeeditsel" class="com.edu.action.HomeAction"
+			method="editsel">
+			<result>../htinclude/edithome.jsp</result>
+		</action>
+
+		<!-- 首页内容编辑 -->
+		<action name="edithome" class="com.edu.action.HomeAction"
+			method="edit">
+			<interceptor-ref name="fileUploadStack" />
+			<result>../ht/homecontent.jsp</result>
+		</action>
+
+		<!-- 艺考报名查询 -->
+		<action name="selart" class="com.edu.action.ArtAction" method="sel">
+			<result>artapply.jsp</result>
+		</action>
+
+		<!-- 艺考编辑查询当前选中的值 -->
+		<action name="selartedit" class="com.edu.action.ArtAction"
+			method="seledit">
+			<result>../htinclude/editart.jsp</result>
+		</action>
+
+		<!-- 艺考编辑城市改变查询县城 -->
+		<action name="selcounty2" class="com.edu.action.ArtAction"
+			method="selcounty">
+			<result>../htinclude/editart.jsp</result>
+		</action>
+
+		<!-- 艺考编辑后台修改 -->
+		<action name="artedit" class="com.edu.action.ArtAction" method="edit">
+			<result>../ht/artapply.jsp</result>
+		</action>
+
+		<!-- 艺考删除当前选中学生 -->
+		<action name="delart" class="com.edu.action.ArtAction" method="del">
+			<result>../ht/artapply.jsp</result>
+		</action>
+
+		<!-- 艺考添加中学生之前查询所有城市 -->
+		<action name="artindex" class="com.edu.action.ArtAction"
+			method="beforeadd">
+			<result>../htinclude/artindex.jsp</result>
+		</action>
+
+		<!-- 艺考添加中学生 -->
+		<action name="artadd" class="com.edu.action.ArtAction" method="add">
+			<result>../ht/artapply.jsp</result>
+		</action>
+
+		<!-- 艺考模糊查询先查询city -->
+		<action name="art" class="com.edu.action.ArtAction" method="selcity">
+			<result>../ht/artapply.jsp</result>
+		</action>
+
+		<!-- 职考报名查询 -->
+		<action name="selpro" class="com.edu.action.ProAction" method="sel">
+			<result>proapply.jsp</result>
+		</action>
+
+		<!-- 职考编辑查询当前选中的值 -->
+		<action name="selproedit" class="com.edu.action.ProAction"
+			method="seledit">
+			<result>../htinclude/editpro.jsp</result>
+		</action>
+
+		<!-- 职考编辑城市改变查询县城 -->
+		<action name="selcounty3" class="com.edu.action.ProAction"
+			method="selcounty">
+			<result>../htinclude/editpro.jsp</result>
+		</action>
+
+		<!-- 职考编辑后台修改 -->
+		<action name="proedit" class="com.edu.action.ProAction" method="edit">
+			<result>../ht/proapply.jsp</result>
+		</action>
+
+		<!-- 职考删除当前选中学生 -->
+		<action name="delpro" class="com.edu.action.ProAction" method="del">
+			<result>../ht/proapply.jsp</result>
+		</action>
+
+		<!-- 职考添加中学生之前查询所有城市 -->
+		<action name="proindex" class="com.edu.action.ProAction"
+			method="beforeadd">
+			<result>../htinclude/proindex.jsp</result>
+		</action>
+
+		<!-- 职考添加中学生 -->
+		<action name="proadd" class="com.edu.action.ProAction" method="add">
+			<result>../ht/proapply.jsp</result>
+		</action>
+
+		<!-- 职考模糊查询先查询city -->
+		<action name="pro" class="com.edu.action.ProAction" method="selcity">
+			<result>../ht/proapply.jsp</result>
+		</action>
+
+		<!-- 日志查询 -->
+		<action name="sellog" class="com.edu.action.SysAction" method="sel">
+			<result>syslog.jsp</result>
+		</action>
+
+		<!-- 批量添加艺考学生 -->
+		<action name="Readart" class="com.edu.action.ReadAction"
+			method="add">
+			<result>../ht/artapply.jsp</result>
+		</action>
+
+		<!-- 前台合作老师登陆 -->
+		<action name="tlogin" class="com.edu.action.TloginAction">
+			<result type="redirect">index.action</result>
+			<result name="error">login2.jsp</result>
+		</action>
+
+		<!-- 退出登陆 -->
+		<action name="tloginout" class="com.edu.action.TloginAction"
+			method="loginout">
+			<result type="redirect">index.action</result>
+		</action>
+
+		<!-- 老师名下所有学生缴费查询 -->
+		<action name="allstu" class="com.edu.action.AllFinance">
+			<result>selectzahlen.jsp</result>
+		</action>
+
+		<!-- 根据用户查询工作助手 -->
+		<action name="gzzs" class="com.edu.action.SelSchedule">
+			<result>aide.jsp</result>
+		</action>
+
+		<!-- 首页查询数据 -->
+		<action name="index" class="com.edu.action.HomeAction" method="selindex">
+			<result>index.jsp</result>
+		</action>
+
+		<!-- 查询单个公告管理 -->
+		<action name="selonenotice" class="com.edu.action.NoticeAction"
+			method="selone">
+			<result>notice.jsp</result>
+		</action>
+		<!-- 查询所有公告 -->
+		<action name="morenotice" class="com.edu.action.NoticeAction"
+			method="selall">
+			<result>notices.jsp</result>
+		</action>
+
+		<!-- 底页面查询 -->
+		<action name="selfooter" class="com.edu.action.HomeAction"
+			method="selfooter">
+			<result>footer.jsp</result>
+		</action>
+
+		<!-- 前台老师修改密码 -->
+		<action name="edituserpassword" class="com.edu.action.TloginAction"
+			method="editpassword">
+			<result type="redirect">index.action</result>
+		</action>
+
+		<!-- 共享合作所有院校图片查询 -->
+		<action name="seleguidelog" class="com.edu.action.EguideAction"
+			method="seleguidelog">
+			<result>into.jsp</result>
+		</action>
+
+		<!-- 单个院校详细信息 -->
+		<action name="selmoreinfo" class="com.edu.action.EguideAction"
+			method="selmore">
+			<result>referral.jsp</result>
+		</action>
+
+		<!-- 删除单个完成的工作助手 -->
+		<action name="delsche" class="com.edu.action.SelSchedule"
+			method="delsche">
+			<result type="redirect">gzzs.action</result>
+		</action>
+
+		<!-- 修改单个工作助手为已完成 -->
+		<action name="editsch" class="com.edu.action.SelSchedule"
+			method="editsche">
+			<result type="redirect">gzzs.action</result>
+		</action>
+
+		<!-- 添加一个工作助手 -->
+		<action name="addsche" class="com.edu.action.SelSchedule"
+			method="addsche">
+			<result></result>
+		</action>
+
+		<!-- 查询所有共享管理 -->
+		<action name="allshare" class="com.edu.action.ShareAction"
+			method="allshare">
+			<result>share.jsp</result>
+		</action>
+
+		<!-- 查询联系老师 -->
+		<action name="relation" class="com.edu.action.RelationAction"
+			method="selall">
+			<result>NewFile2.jsp</result>
+		</action>
+
+		<!-- qiu -->
+		<!-- adultapply成人教育报名表的查询 -->
+		<action name="seladult" class="com.edu.action.SelAction"
+			method="seladultapply">
+			<result></result>
+		</action>
+
+		<!-- 添加成人高考报名信息 (打开添加窗口 查询一些下拉框显示信息) -->
+		<action name="adultadd" class="com.edu.action.SelAction"
+			method="seladultteacher">
+			<result>../htinclude/adultadd.jsp</result>
+		</action>
+
+		<!-- 根据院校id查询院校的专业 -->
+		<action name="selsep" class="com.edu.action.SelAction" method="selsep">
+			<result></result>
+		</action>
+
+		<!-- 根据城市id查询县/区 有默认选中 -->
+		<action name="selcounty" class="com.edu.action.SelAction"
+			method="selcounty">
+			<result></result>
+		</action>
+
+
+
+		<!-- 添加成人高考报名数据到数据库 -->
+		<action name="addadult" class="com.edu.action.AddAction"
+			method="addadult">
+			<result>../ht/adultapply.jsp</result>
+		</action>
+
+		<!-- 编辑成人高考报名信息 先查询 -->
+		<action name="beforeadultedit" class="com.edu.action.BeforeEditAction"
+			method="beforeadultedit">
+			<result>../htinclude/adultedit.jsp</result>
+		</action>
+
+		<!-- 编辑成人高考报名信息到数据库 -->
+		<action name="editadult" class="com.edu.action.EditAction"
+			method="editadult">
+			<result>../ht/adultapply.jsp</result>
+		</action>
+
+		<!-- 删除成人报名表信息 -->
+		<action name="deladult" class="com.edu.action.DelAction"
+			method="deladult">
+			<result></result>
+		</action>
+
+		<!-- 查询国家开放大学报名表的数据 -->
+		<action name="selstate" class="com.edu.action.SelAction"
+			method="selstateapply">
+			<result></result>
+		</action>
+
+		<!-- 添加国家开放大学报名信息 (打开窗口 查询一些下拉框信息) -->
+		<action name="stateadd" class="com.edu.action.SelAction"
+			method="seladultteacher">
+			<result>../htinclude/stateadd.jsp</result>
+		</action>
+
+		<!-- 添加国家开放大学报名信息到数据库 -->
+		<action name="addstate" class="com.edu.action.AddAction"
+			method="addstate">
+			<result>../ht/stateapply.jsp</result>
+		</action>
+
+		<!-- 编辑国家开放大学报名信息 先查询 -->
+		<action name="beforestateedit" class="com.edu.action.BeforeEditAction"
+			method="beforestateedit">
+			<result>../htinclude/stateedit.jsp</result>
+		</action>
+
+		<!-- 编辑国家开放大学报名信息到数据库 -->
+		<action name="editstate" class="com.edu.action.EditAction"
+			method="editstate">
+			<result>../ht/stateapply.jsp</result>
+		</action>
+
+		<!-- 删除国家开放大学报名表信息 -->
+		<action name="delstate" class="com.edu.action.DelAction"
+			method="delstate">
+			<result></result>
+		</action>
+
+		<!-- distanceapply 远程报名表的查询 -->
+		<action name="seldistance" class="com.edu.action.SelAction"
+			method="seldistance">
+			<result></result>
+		</action>
+
+		<!-- 添加远程教育报名信息(打开窗口 查询一些下拉框信息) -->
+		<action name="distanceadd" class="com.edu.action.SelAction"
+			method="seladultteacher">
+			<result>../htinclude/distanceadd.jsp</result>
+		</action>
+
+		<!-- 添加远程教育报名数据到数据库 -->
+		<action name="adddistance" class="com.edu.action.AddAction"
+			method="adddistance">
+			<result>../ht/adultapply.jsp</result>
+		</action>
+
+		<!-- 编辑远程教育报名信息 先查询 -->
+		<action name="beforedistanceedit" class="com.edu.action.BeforeEditAction"
+			method="beforedistanceedit">
+			<result>../htinclude/distanceedit.jsp</result>
+		</action>
+
+		<!-- 编辑远程报名信息到数据库 -->
+		<action name="editdistance" class="com.edu.action.EditAction"
+			method="editdistance">
+			<result>../ht/distanceapply.jsp</result>
+		</action>
+
+		<!-- 删除远程教育报名表信息 -->
+		<action name="deldis" class="com.edu.action.DelAction" method="deldis">
+			<result></result>
+		</action>
+
+		<!-- 查询成人报名缴费表 -->
+		<action name="seladultfinance" class="com.edu.action.SelAction"
+			method="seladultfinance">
+			<result></result>
+		</action>
+
+		<!-- 删除成人缴费表信息 -->
+		<action name="deladultfinance" class="com.edu.action.DelAction"
+			method="deladultfinance">
+			<result></result>
+		</action>
+
+		<!-- 查询国家开放大学报名缴费表 -->
+		<action name="selstatefinance" class="com.edu.action.SelAction"
+			method="selstatefinance">
+			<result></result>
+		</action>
+
+		<!-- 删除国家开放大学缴费表信息 -->
+		<action name="delstatefinance" class="com.edu.action.DelAction"
+			method="delstatefinance">
+			<result></result>
+		</action>
+
+		<!-- 查询远程教育报名缴费表 -->
+		<action name="seldisfinance" class="com.edu.action.SelAction"
+			method="seldisfinance">
+			<result></result>
+		</action>
+
+		<!-- 删除远程教育缴费表信息 -->
+		<action name="deldisfinance" class="com.edu.action.DelAction"
+			method="deldisfinance">
+			<result></result>
+		</action>
+
+		<!-- 查询会计缴费表信息 -->
+		<action name="selaccfinance" class="com.edu.action.SelAction"
+			method="selaccfinance">
+			<result></result>
+		</action>
+
+		<!-- 删除会计缴费表 -->
+		<action name="delaccfinance" class="com.edu.action.DelAction"
+			method="delaccfinance">
+			<result></result>
+		</action>
+
+		<!-- 查询职考缴费表 -->
+		<action name="selprofinance" class="com.edu.action.SelAction"
+			method="selprofinance">
+			<result></result>
+		</action>
+
+		<!-- 删除职考缴费表 -->
+		<action name="delprofinance" class="com.edu.action.DelAction"
+			method="delprofinance">
+			<result></result>
+		</action>
+
+		<!-- 查询职考缴费表 -->
+		<action name="selartfinance" class="com.edu.action.SelAction"
+			method="selartfinance">
+			<result></result>
+		</action>
+
+		<!-- 删除艺考缴费表 -->
+		<action name="delartfinance" class="com.edu.action.DelAction"
+			method="delartfinance">
+			<result></result>
+		</action>
+
+		<!-- 超级管理员进工作助手前先查 所有用户 -->
+		<action name="selsche" class="com.edu.action.SelAction" method="selsche">
+			<result>/ht/schedule.jsp</result>
+		</action>
+
+		<!-- 超级管理员查询所有员工的工作助手的信息 -->
+		<action name="selschedules" class="com.edu.action.SelAction"
+			method="selschedule">
+			<result></result>
+		</action>
+
+		<!-- 添加工作助手时 先查询所有用户 -->
+		<action name="addschedule" class="com.edu.action.SelAction"
+			method="addschedule">
+			<result name="success">/htinclude/scheduleadd.jsp</result>
+			<result name="login">/htinclude/scheduleadd1.jsp</result>
+		</action>
+
+		<!-- 添加工作助手到数据库 -->
+		<action name="scheduleadd" class="com.edu.action.AddAction"
+			method="scheduleadd">
+			<result></result>
+		</action>
+
+		<!-- 编辑工作助手前 先查询 -->
+		<action name="beforescheduleedit" class="com.edu.action.BeforeEditAction"
+			method="beforescheduleedit">
+			<result name="success">/htinclude/scheduleedit.jsp</result>
+			<result name="login">/htinclude/scheduleedit1.jsp</result>
+		</action>
+
+		<!-- 把编辑后的信息插入数据库 -->
+		<action name="editschedule" class="com.edu.action.EditAction"
+			method="editschedule">
+			<result>/ht/schedule.jsp</result>
+		</action>
+
+		<!-- 删除工作助手信息 -->
+		<action name="delschedule" class="com.edu.action.DelAction"
+			method="delschedule">
+			<result></result>
+		</action>
+
+		<!-- 判断用户是否有角色管理权限 -->
+		<action name="hasrolejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/role.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有用户管理权限 -->
+		<action name="hasuserjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/usermanagement.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有部门管理权限 -->
+		<action name="hasdepjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/department.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有成考报名权限 -->
+		<action name="hasadultjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/adultapply.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有会计报名权限 -->
+		<action name="hasaccjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/accountant.action</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有国家开放大学报名权限 -->
+		<action name="hasstatejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/stateapply.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+
+		<!-- 判断用户是否有远程报名权限 -->
+		<action name="hasdisjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/distanceapply.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+
+		<!-- 判断用户是否有艺考报名权限 -->
+		<action name="hasartjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/art.action</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+
+		<!-- 判断用户是否有职业资格报名权限 -->
+		<action name="hasprojur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/pro.action</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有文件上传权限 -->
+		<action name="hasfilejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/stufile.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有专业管理权限 -->
+		<action name="hasmajor" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/major.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有热门专业权限 -->
+		<action name="hashotmajor" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/hotmajor.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有招生简章权限 -->
+		<action name="haseguidejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/eguide.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有登陆日志权限 -->
+		<action name="hasloginlogjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/syslog.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有共享管理权限 -->
+		<action name="hassharejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/share.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有联系方式权限 -->
+		<action name="hasrelationjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/relation.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有公告管理权限 -->
+		<action name="hasnoticejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/notice.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有首页内容管理权限 -->
+		<action name="hashomecontentjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/homecontent.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有工作提醒管理权限 -->
+		<action name="hasschedulejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">selsche.action</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有成考缴费管理权限 -->
+		<action name="hasadultfinancejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/adultfinance.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有会计缴费管理权限 -->
+		<action name="hasaccfinancejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/accountantfinance.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有国家开放缴费管理权限 -->
+		<action name="hasstatefinancejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/statefinance.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有远程缴费管理权限 -->
+		<action name="hasdisfinancejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/distancefinance.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有艺考缴费管理权限 -->
+		<action name="hasartfinancejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/artfinance.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有职考缴费管理权限 -->
+		<action name="hasprofinancejur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/professionfinance.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有报名统计报表查询管理权限 -->
+		<action name="hasreportjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/jf.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 判断用户是否有财务报表查询权限 -->
+		<action name="hasfinancereportjur" class="com.edu.action.HasjurAction"
+			method="hasjur">
+			<result name="success" type="redirect">ht/jf1.jsp</result>
+			<result name="error">ht/nojur.jsp</result>
+		</action>
+
+		<!-- 给角色授权 先查询该用户有什么角色 -->
+		<action name="findgrant" class="com.edu.action.GrantAction"
+			method="findgrant">
+			<result>htinclude/grant.jsp</result>
+		</action>
+
+		<!-- 修改角色权限 -->
+		<action name="grant" class="com.edu.action.GrantAction" method="grant">
+			<result>role.jsp</result>
+		</action>
+
+		<!-- 添加用户时先查询部门和角色 -->
+		<action name="beforeadduser" class="com.edu.action.SelAction"
+			method="beforeadduser">
+			<result>../htinclude/useradd.jsp</result>
+		</action>
+
+		<!-- 查询学生文件上传表的信息 -->
+		<action name="selstufile" class="com.edu.action.SelAction"
+			method="selstufile">
+			<result></result>
+		</action>
+
+		<!-- 查询成人高考表的学生信息 -->
+		<action name="seladultstu" class="com.edu.action.SelAction"
+			method="seladultstu">
+			<result></result>
+		</action>
+
+		<!-- 获取文件上传时的学生id和name到action -->
+		<action name="back" class="com.edu.action.SelAction" method="back">
+			<result>../htinclude/stufileadd.jsp</result>
+		</action>
+
+		<!-- 添加学生文件上传到服务器 数据插入数据库 -->
+		<action name="addfile" class="com.edu.action.FileuploadAction"
+			method="addfile">
+			<!-- 配置拦截器拦截 -->
+			<interceptor-ref name="fileUploadStack" />
+			<result>stufile.jsp</result>
+		</action>
+
+		<!-- 编辑学生文件上传前先查询 -->
+		<action name="beforeeditfile" class="com.edu.action.BeforeEditAction"
+			method="beforeeditfile">
+			<result>../htinclude/stufileedit.jsp</result>
+		</action>
+
+		<!-- 把编辑后文件上传的值插入数据库 -->
+		<action name="editfile" class="com.edu.action.EditfileAction"
+			method="editfile">
+			<!-- 配置拦截器拦截 -->
+			<interceptor-ref name="fileUploadStack" />
+			<result>stufile.jsp</result>
+		</action>
+
+		<!-- 下载相片 -->
+		<action name="downloadphoto" class="com.edu.action.DownloadAction"
+			method="downloadphoto">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+
+				<param name="inputName">fileInput</param>
+
+				<param name="contentDisposition">attachment;fileName=${fileName}</param>
+
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 下载缴费凭证 -->
+		<action name="downloadvoucher" class="com.edu.action.DownloadAction"
+			method="downloadvoucher">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+
+				<param name="inputName">fileInput</param>
+
+				<param name="contentDisposition">attachment;fileName=${fileName}</param>
+
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 下载论文 -->
+		<action name="downloadpaper" class="com.edu.action.DownloadAction"
+			method="downloadpaper">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+
+				<param name="inputName">fileInput</param>
+
+				<param name="contentDisposition">attachment;fileName=${fileName}</param>
+
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 下载成人报名表导出的excel -->
+		<action name="uploadexport" class="com.edu.action.DownloadAction"
+			method="uploadexport">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+
+				<param name="inputName">fileInput</param>
+
+				<param name="contentDisposition">attachment;fileName=${fileName}</param>
+
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+
+
+		<!-- 根据学生学号和姓名判断是否有该学生 -->
+		<action name="hasstu" class="com.edu.action.SelAction" method="hasstu">
+			<result></result>
+		</action>
+
+		<!-- 前台页面上传学生相片 缴费凭证 论文 -->
+		<action name="uploadfile" class="com.edu.action.JspuploadAction"
+			method="uploadfile">
+			<!-- 配置拦截器拦截 -->
+			<interceptor-ref name="fileUploadStack" />
+			<result type="redirect">index.action</result>
+		</action>
+
+		<!-- 修改后台用户密码 -->
+		<action name="updateuserpwd" class="com.edu.action.UpdateAction"
+			method="updateuserpwd">
+			<result></result>
+		</action>
+
+		<!-- 查询成人高考缴费表学生信息 -->
+		<action name="beforeadultfinanceedit" class="com.edu.action.BeforeEditAction"
+			method="beforeadultfinanceedit">
+			<result>/htinclude/adultfinanceedit.jsp</result>
+		</action>
+
+		<!-- 修改成人高考缴费表信息 -->
+		<action name="editadultfinance" class="com.edu.action.EditAction"
+			method="editadultfinance">
+			<result></result>
+		</action>
+
+		<!-- 查询会计缴费表信息 -->
+		<action name="beforeaccedit" class="com.edu.action.BeforeEditAction"
+			method="beforeaccedit">
+			<result>/htinclude/accountantfinanceedit.jsp</result>
+		</action>
+
+		<!-- 保存编辑会计缴费表到数据库 -->
+		<action name="editaccfinance" class="com.edu.action.EditAction"
+			method="editaccfinance">
+			<result></result>
+		</action>
+
+		<!-- 编辑前查询艺考缴费表的信息 -->
+		<action name="beforeartedit" class="com.edu.action.BeforeEditAction"
+			method="beforeartedit">
+			<result>/htinclude/artfinanceedit.jsp</result>
+		</action>
+
+		<!-- 保存编辑会计缴费表到数据库 -->
+		<action name="editartfinance" class="com.edu.action.EditAction"
+			method="editartfinance">
+			<result></result>
+		</action>
+
+		<!-- 编辑前查职考缴费表信息 -->
+		<action name="beforeproedit" class="com.edu.action.BeforeEditAction"
+			method="beforeproedit">
+			<result>/htinclude/profinanceedit.jsp</result>
+		</action>
+
+		<!-- 保存编辑职考缴费表到数据库 -->
+		<action name="editprofinance" class="com.edu.action.EditAction"
+			method="editprofinance">
+			<result></result>
+		</action>
+
+		<!-- 编辑前查询国家开放大学缴费表信息 -->
+		<action name="beforestatefinanceedit" class="com.edu.action.BeforeEditAction"
+			method="beforestatefinanceedit">
+			<result>/htinclude/statefinanceedit.jsp</result>
+		</action>
+
+		<!-- 保存国家开放大学缴费表 -->
+		<action name="editstatefinance" class="com.edu.action.EditAction"
+			method="editstatefinance">
+			<result></result>
+		</action>
+
+		<!-- 编辑前查询远程缴费表信息 -->
+		<action name="beforedisedit" class="com.edu.action.BeforeEditAction"
+			method="beforedisedit">
+			<result>/htinclude/disfinanceedit.jsp</result>
+		</action>
+
+		<!-- 保存编辑远程缴费表信息到数据库 -->
+		<action name="editdisfinance" class="com.edu.action.EditAction"
+			method="editdisfinance">
+			<result></result>
+		</action>
+
+		<!-- 批量添加数据到成人报名表 先上传.xlsx后缀的表格 -->
+		<action name="adultapplyaddmanyfileupload" class="com.edu.action.AdultApplyFileuploadAction"
+			method="adultapplyaddmanyfileupload">
+			<!-- 配置拦截器拦截 -->
+			<interceptor-ref name="fileUploadStack" />
+			<result>/ht/adultapply.jsp</result>
+		</action>
+
+		<!-- 导出成人高考报名表数据 -->
+		<action name="exportmanyadultapply" class="com.edu.action.AdultApplyFileuploadAction"
+			method="exportmanyadultapply">
+			<result></result>
+		</action>
+
+		<!-- 下载模版 -->
+		<action name="downloadmoban" class="com.edu.action.DownloadAction"
+			method="downloadmoban">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+
+				<param name="inputName">fileInput</param>
+
+				<param name="contentDisposition">attachment;fileName=${fileName}</param>
+
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 老师生成二维码 -->
+		<action name="terweima" class="com.edu.action.DownloadAction"
+			method="terweima">
+			
+		</action>
+
+		<!-- 下载老师生成的二维码 -->
+		<action name="downloaderweima" class="com.edu.action.DownloadAction"
+			method="downloaderweima">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+
+				<param name="inputName">fileInput</param>
+
+				<param name="contentDisposition">attachment;fileName=${fileName}</param>
+
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<!-- 峰 -->
+		<!-- 会计报名上传类型 -->
+		<action name="data" class="com.edu.action.UserAction" method="data">
+			<result type="redirect">select2.action</result>
+		</action>
+
+		<!--艺考报名上传类型 -->
+		<action name="data3" class="com.edu.action.UserAction" method="data2">
+			<result type="redirect">select3.action</result>
+		</action>
+
+		<!--职业资格上传类型 -->
+		<action name="data4" class="com.edu.action.UserAction" method="data3">
+			<result type="redirect">select4.action</result>
+		</action>
+
+		<!--成人教育上传类型 -->
+		<action name="data2" class="com.edu.action.UserAction1" method="data2">
+			<result type="redirect">select.action</result>
+		</action>
+
+		<!--国家开放上传类型 -->
+		<action name="data5" class="com.edu.action.UserAction1" method="data4">
+			<result type="redirect">select5.action</result>
+		</action>
+
+		<!--远程教育上传类型 -->
+		<action name="data6" class="com.edu.action.UserAction1" method="data5">
+			<result type="redirect">select6.action</result>
+		</action>
+
+
+
+		<!-- 成人教育市查询 -->
+		<action name="select" class="com.edu.action.UserAction1"
+			method="city">
+			<result>contact1.jsp</result>
+		</action>
+
+		<!-- 会计报名市查询 -->
+		<action name="select2" class="com.edu.action.UserAction"
+			method="city">
+			<result>contact01.jsp</result>
+		</action>
+
+		<!-- 艺考报名市查询 -->
+		<action name="select3" class="com.edu.action.UserAction"
+			method="city">
+			<result>contact02.jsp</result>
+		</action>
+
+		<!-- 职业资格市查询 -->
+		<action name="select4" class="com.edu.action.UserAction"
+			method="city">
+			<result>contact03.jsp</result>
+		</action>
+
+		<!-- 国家开放市查询 -->
+		<action name="select5" class="com.edu.action.UserAction1"
+			method="city">
+			<result>contact2.jsp</result>
+		</action>
+
+		<!-- 国家开放市查询 -->
+		<action name="select6" class="com.edu.action.UserAction1"
+			method="city">
+			<result>contact3.jsp</result>
+		</action>
+
+
+
+
+		<!-- 县城查询 -->
+		<action name="sele" class="com.edu.action.UserAction1" method="County">
+			<result>
+			</result>
+		</action>
+
+		<!-- 成人教育专业查询 -->
+		<action name="Acaspe" class="com.edu.action.UserAction1"
+			method="Acaspe">
+			<result>
+			</result>
+		</action>
+
+		<!-- 主页轮播动画 -->
+		<action name="wheel" class="com.edu.action.UserAction1" method="wheel">
+
+			<result name="success" type="redirect">
+				index.action
+			</result>
+
+			<result name="error">
+				publicity.jsp
+			</result>
+		</action>
+<!-- 短信验证 -->
+<action name="dx" class="com.edu.action.UserAction1" method="dxyz">
+			<result>
+			</result>
+		</action>
+
+		<action name="cour" class="com.edu.action.HomeAction" method="saveid">
+			<result>courses.jsp</result>
+		</action>
+	</package>
+	<!-- 报表************************************************************************** -->
+	<package name="Chart" extends="jfreechart-default">
+		<action name="CRPieAction" class="com.edu.action.CRPieChartAction">
+			<result type="chart">
+				<param name="width">600</param>
+				<param name="height">450</param>
+			</result>
+		</action>
+
+		<action name="JFPieAction" class="com.edu.action.JFPieChartAction">
+			<result type="chart">
+				<param name="width">600</param>
+				<param name="height">450</param>
+			</result>
+		</action>
+
+		<!-- 饼图 -->
+		<action name="CRPieAction" class="com.edu.action.CRPieChartAction">
+			<result type="chart">
+				<param name="width">600</param>
+				<param name="height">450</param>
+			</result>
+		</action>
+
+		<!-- 柱状图 -->
+
+		<action name="bar" class="com.edu.action.BarAction" method="bar">
+			<result type="chart">
+				ht/bar.jsp
+				<!-- 定义 JFreeChart 报表的大小 -->
+				<param name="width">1210</param>
+				<param name="height">540</param>
+			</result>
+		</action>
+
+		<!-- 折线图 -->
+		<action name="line" class="com.edu.action.LineAction" method="line">
+			<result type="chart">
+				ht/line.jsp
+				<!-- 定义 JFreeChart 报表的大小 -->
+				<param name="width">1210</param>
+				<param name="height">540</param>
+			</result>
+		</action>
+	</package>
+	<!-- ************************************************************************** -->
+</struts>

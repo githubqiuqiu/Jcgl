@@ -1,0 +1,129 @@
+package com.edu.model;
+
+import java.io.Serializable;
+
+/**
+ * 
+ * @author Min
+ *	用户表            id 主键
+ *			loginname登录名 
+ *			name用户名
+ *			password密码
+ *		  	sex性别     0为男   1为女
+ *			age年龄
+ *			phone电话
+ *			usertype用户类型  0用户 1管理员
+ *			status用户状态  0启用 1停用
+ *			organizationid所属机构
+ *			createtime时间
+ *			rid 角色id
+ */
+public class User implements Serializable{
+	private Integer id;
+	private String loginname;
+	private String name;
+	private String password;
+	private Integer sex;
+	private Integer age;
+	private String phone;
+	private Integer usertype;
+	private Integer status;
+	private Integer organizationid;
+	private String createtime;
+	private Integer rid;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getLoginname() {
+		return loginname;
+	}
+	public void setLoginname(String loginname) {
+		this.loginname = loginname;
+	}
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Integer getSex() {
+		return sex;
+	}
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
+	public Integer getAge() {
+		return age;
+	}
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public Integer getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(Integer usertype) {
+		this.usertype = usertype;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public Integer getOrganizationid() {
+		return organizationid;
+	}
+	public void setOrganizationid(Integer organizationid) {
+		this.organizationid = organizationid;
+	}
+	public String getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
+	public Integer getRid() {
+		return rid;
+	}
+	public void setRid(Integer rid) {
+		this.rid = rid;
+	}
+	
+	
+		//角色管理表
+		private Role role;
+		public Role getRole() {
+			return role;
+		}
+		public void setRole(Role role) {
+			this.role = role;
+		}
+		
+		//部门表
+		private Organization organization;
+		public void setOrganization(Organization organization) {
+			this.organization = organization;
+		}
+		public Organization getOrganization() {
+			return organization;
+		}
+		
+		
+	
+}

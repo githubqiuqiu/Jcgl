@@ -1,0 +1,79 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+        <title>登录界面</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- CSS -->
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/css/supersized.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+			
+		
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.8.2.min.js"></script>
+        <script src="assets/js/supersized.3.2.7.min.js"></script>
+        <script src="assets/js/supersized-init.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        	
+		<style type="text/css">
+			a{
+				text-decoration: none
+			}
+			
+		
+		</style>
+		
+		
+		<script type="text/javascript">
+		//换验证码
+		 function changeImg(){
+		        var img = document.getElementById("img"); 
+		        img.src = "/project/yzm?date=" + new Date();;
+		    }	
+		
+		</script>      
+
+
+
+    </head>
+
+    <body>
+
+        <div class="page-container">
+         
+            <form action="SignUp" method="post">
+                <input type="text" id="loginname" name="user.loginname" placeholder="请输入账号">${zhmsg }<br/>
+                <input type="password" id="password" name="user.password"  placeholder="请输入密码">${mmmsg }<br/>
+                 <input type="text" id="yzm" name="yzm"  placeholder="请输入验证码">${yzmmsg }
+                	&nbsp;
+                 <div id="div2" >
+                 	&nbsp;
+                 	<img id="img" src="/project/yzm" />
+      			  <a href='#' onclick="javascript:changeImg()" style="color:white;"><label style="color:red;">看不清？</label></a>
+                 	
+                 </div>
+                 
+                <button type="submit" id="btn">登录</button>
+               <div class="error"><span>+</span></div>
+             </form>
+            <div class="connect">
+                <p>
+                    <a class="facebook" href="index.jsp"></a>
+                    <a class="twitter" href="courses.jsp"></a>
+                </p>
+            </div>
+        </div>
+
+
+
+    </body>
+
+</html>
+
+

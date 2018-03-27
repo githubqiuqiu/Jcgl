@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    	<class name="com.edu.model.Homecontent" table="homecontent">
+    		<id name="hcid">
+    			<generator class="native"></generator>
+    		</id>
+    		<property name="pictureone"></property>
+    		<property name="picturetwo"></property>
+    		<property name="picturethree"></property>
+    		<property name="qrcodeone"></property>
+    		<property name="qrcodetwo"></property>
+    		<property name="hcphone"></property>
+    		<property name="hcaddress"></property>
+    		<property name="interlinkageone"></property>
+    		<property name="interlinkagetwo"></property>
+    		<property name="interlinkagethree"></property>
+    		<property name="interlinkagefour"></property>
+    	</class>
+    </hibernate-mapping>

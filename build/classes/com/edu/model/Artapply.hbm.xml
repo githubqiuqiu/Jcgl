@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    <hibernate-mapping>
+    	<class name="com.edu.model.Artapply" table="artapply">
+    		<id name="aid">
+    			<generator class="native"></generator>
+    		</id>
+    		<property name="astudentno"></property>
+    		<property name="aname"></property>
+    		<property name="userid"></property>
+    		<property name="aphone"></property>
+    		<property name="acontent"></property>
+    		<property name="cityid"></property>
+    		<property name="countyid"></property>
+    		<property name="adata"></property>
+    		<one-to-one name="artfinance" class="com.edu.model.Artfinance"></one-to-one>
+    		<many-to-one name="user" column="userid" class="com.edu.model.User" insert="false" update="false"></many-to-one>
+    		<many-to-one name="city" column="cityid" class="com.edu.model.City" insert="false" update="false"></many-to-one>
+    		<many-to-one name="county" column="countyid" class="com.edu.model.County" insert="false" update="false"></many-to-one>
+    	</class>
+    </hibernate-mapping>

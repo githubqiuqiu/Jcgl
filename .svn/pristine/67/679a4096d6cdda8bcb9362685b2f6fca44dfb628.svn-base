@@ -1,0 +1,52 @@
+package com.edu.action;
+
+import com.edu.model.Organization;
+import com.edu.model.Role;
+import com.edu.service.QiuService;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class DelAction extends ActionSupport{
+	private Role role;
+	private Organization organization;
+	private QiuService qiuService;
+	
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
+	public QiuService getQiuService() {
+		return qiuService;
+	}
+
+	public void setQiuService(QiuService qiuService) {
+		this.qiuService = qiuService;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	//删除角色管理
+	public String delrole() {
+		System.out.println(role.getId());
+		qiuService.delrole(role.getId());
+		return null;
+	}
+	
+	//删除部门管理
+	public String delorg() {
+		qiuService.delorg(organization.getId());
+		return null;
+	}
+	
+	
+}

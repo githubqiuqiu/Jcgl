@@ -1,0 +1,52 @@
+package com.edu.dao.impl;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.edu.dao.MinDao;
+import com.edu.model.Organization;
+
+public class MinDaoImpl implements MinDao {
+
+	private HibernateTemplate hibernateTemplate;
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+	@Override
+	public List<Organization> seldata(int pag,int row) {
+		try {
+        	 List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+       			 
+                 public Object doInHibernate(Session session)  
+                          throws HibernateException, SQLException {  
+                     List list2 = session.createQuery("from Organization")  
+                             .setFirstResult((pag-1)*row)  
+                             .setMaxResults(row)  
+                             .list();                     
+                     return list2;  
+                 }});  
+             return list;  
+        	 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	@Override
+	public int selline() {
+//		System.out.println("456!");
+		// TODO Auto-generated method stub
+		Long count = (Long)hibernateTemplate.find("select count(*) from Organization").listIterator().next();
+//		System.out.println(count.intValue());
+		return count.intValue();
+	}
+
+}

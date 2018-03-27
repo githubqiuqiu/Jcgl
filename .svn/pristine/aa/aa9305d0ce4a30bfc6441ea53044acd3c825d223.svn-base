@@ -1,0 +1,88 @@
+package com.edu.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.edu.model.Organization;
+import com.edu.model.Role;
+import com.edu.model.User;
+import com.edu.service.QiuService;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class EditAction extends ActionSupport{
+	private Role role;
+	private QiuService qiuService;
+	private User user;
+	private Organization organization;
+	
+	
+	
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public QiuService getQiuService() {
+		return qiuService;
+	}
+
+	public void setQiuService(QiuService qiuService) {
+		this.qiuService = qiuService;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	//保存role表的编辑到数据库
+	public String editrole() {
+		HttpServletResponse res=ServletActionContext.getResponse();
+		HttpServletRequest req=ServletActionContext.getRequest();
+		HttpSession session=req.getSession();
+		qiuService.saverole(role);
+		
+		return null;
+	}
+	
+	//保存user表的编辑到数据库
+	public String edituser() {
+		HttpServletResponse res=ServletActionContext.getResponse();
+		HttpServletRequest req=ServletActionContext.getRequest();
+		HttpSession session=req.getSession();
+		
+		qiuService.savauser(user);
+	
+		return null;
+	}
+	
+	//保存organization表的编辑到数据库
+	public String editdep() {
+		HttpServletResponse res=ServletActionContext.getResponse();
+		HttpServletRequest req=ServletActionContext.getRequest();
+		HttpSession session=req.getSession();
+		
+		qiuService.savedep(organization);
+		
+		return null;
+	}
+	
+	
+}

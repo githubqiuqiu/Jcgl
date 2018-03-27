@@ -1,0 +1,12 @@
+package com.edu.dao;
+
+import java.util.List;
+
+import com.edu.model.Organization;
+
+public interface MinDao {
+	//查询数据
+	public List<Organization> seldata(int pag,int row);
+	//查条数
+	public int selline();
+}

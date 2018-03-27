@@ -1,0 +1,313 @@
+package com.edu.dao.impl;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
+import com.edu.bean.OrganizationBean;
+import com.edu.bean.RoleBean;
+import com.edu.dao.QiuDao;
+import com.edu.model.Organization;
+import com.edu.model.Role;
+import com.edu.model.User;
+
+public class QiuDaoImpl implements QiuDao{
+	private HibernateTemplate hibernateTemplate;
+
+	public HibernateTemplate getHibernateTemplate() {
+		return hibernateTemplate;
+	}
+
+	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+		this.hibernateTemplate = hibernateTemplate;
+	}
+
+	//查询用户管理表
+	public List<User> showlist(int begin,int row) {
+         try {
+        	 
+        	/* hibernateTemplate.execute(new HibernateCallback() {
+				@Override
+				public Object doInHibernate(Session session) throws HibernateException, SQLException {
+					session.createSQLQuery("select * from ");
+					// List<Object[]> 
+					  
+					return null;
+				}
+        		 
+        	 });*/
+			
+        	 //此语句还可以这样写(没有用到关联关系)
+        	 //from User u,Role r,Organization o where u.rid=r.id and u.organizationid=o.id
+        	 List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+                 public Object doInHibernate(Session session)  
+                          throws HibernateException, SQLException {  
+                     List list2 = session.createQuery("from User u inner join u.role inner join u.organization ")  
+                             .setFirstResult((begin-1)*row)  
+                             .setMaxResults(row)  
+                             .list();  
+                     
+                     
+                     
+                     return list2;  
+                 }});
+        	 
+             return list;  
+        	 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//模糊查询查询用户管理模块的数据
+	public List<User> showlistbyname(int begin, int row, String name) {
+		try {
+        	 //此语句还可以这样写(没有用到关联关系)
+        	 //from User u,Role r,Organization o where u.rid=r.id and u.organizationid=o.id
+        	 List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+                 public Object doInHibernate(Session session)  
+          
+                          throws HibernateException, SQLException {  
+                     Query query = session.createQuery("from User u,Role r,Organization o where u.rid=r.id and u.organizationid=o.id and u.name like ?")  
+                             .setFirstResult((begin-1)*row)  
+                             .setMaxResults(row);  
+                      query.setString(0, "%"+name+"%");
+                     List<User> list2=query.list();        
+                     return list2;  
+                 }});
+        	 
+             return list;  
+        	 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+		
+	}
+	
+
+	//查用户管理模块的总数据条数
+	public int listcount() {
+		Long count = (Long)hibernateTemplate.find("select count(*) from User").listIterator().next();
+        return count.intValue();
+	}
+
+	//添加账号密码到数据库
+	public void adddata(User u) {
+		hibernateTemplate.save(u);
+	}
+
+	//根据用户名查询用户信息
+	public List<User> findUser(String uname) {
+		List<User> list=hibernateTemplate.find("from User u where loginname=?",uname);
+		return list;
+	}
+
+	//判断账号密码是否匹配(根据账号密码查用户信息)
+	public List<User> selectUser(String uname, String pwd) {
+		List<User> list=hibernateTemplate.find("from User u where loginname=? and password=?",uname,pwd);
+		return list;
+	}
+
+	//查询角色管理模块的总数据条数
+	public int listcount1() {
+		Long count = (Long)hibernateTemplate.find("select count(*) from Role").listIterator().next();
+        return count.intValue();
+	}
+
+	//查询角色管理模块的总数据(带分页)
+	public List<Role> showlist1(int begin, int row) {
+		 try {
+	         List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+	               public Object doInHibernate(Session session)  
+	                         throws HibernateException, SQLException {  
+	                    List list2 = session.createQuery("from Role")  
+	                             .setFirstResult((begin-1)*row)  
+	                             .setMaxResults(row)  
+	                             .list();                     
+	                     return list2;  
+	                 }});  
+	             return list;  
+	        	 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	//添加角色管理信息到数据库
+	public void addrole(Role role) {
+		hibernateTemplate.save(role);
+	
+	}
+
+	//添加用户管理信息到数据库
+	public void adduser(User user) {
+		hibernateTemplate.save(user);
+	}
+
+	@Override
+	public void adddep(Organization o) {
+		hibernateTemplate.save(o);
+	}
+
+	//删除角色管理信息
+	public void delrole(int id) {
+		Role role=hibernateTemplate.get(Role.class, id);
+		hibernateTemplate.delete(role);
+	}
+
+	//删除部门管理信息
+	public void delorg(int id) {
+		Organization o=hibernateTemplate.get(Organization.class, id);
+		hibernateTemplate.delete(o);
+	}
+
+	//重置用户登录密码
+	public void resertpwd(int id) {
+		
+		User u=hibernateTemplate.get(User.class, id);
+		u.setPassword("123456");
+		
+		//System.out.println("id="+u.getId()+"name="+u.getLoginname()+"pwd="+u.getPassword());
+		hibernateTemplate.update(u);
+	
+	}
+
+	//根据id查询角色管理表的信息
+	public Role selrole(int id) {
+		Role role=hibernateTemplate.get(Role.class, id);
+		return role;
+	}
+
+	
+	//根据id查部门管理表的信息
+	public Organization selorg(int id) {
+		Organization o=hibernateTemplate.get(Organization.class, id);
+		return o;
+	}
+	
+	
+	//根据id查询用户管理表的信息
+	public User seluser(int id) {
+		 /*try {
+        	
+	        //此语句还可以这样写(没有用到关联关系)
+	        //from User u,Role r,Organization o where u.rid=r.id and u.organizationid=o.id
+	        List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+	               public Object doInHibernate(Session session)  
+	                        throws HibernateException, SQLException {  
+	          List list2 = session.createQuery("from User u inner join u.role inner join u.organization where u.id="+id).list();       
+	                     return list2;  
+	                 }});
+	        	return list;
+	        	  
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return  null;*/
+		User u=hibernateTemplate.get(User.class, id);
+		
+		return u;
+	}
+
+	//保存编辑role表数据到数据库
+	public void saverole(Role r) {
+		Role ro=hibernateTemplate.get(Role.class, r.getId());
+		
+		ro.setName(r.getName());
+		ro.setSeq(r.getSeq());
+		ro.setStatus(r.getStatus());
+		ro.setDescription(r.getDescription());
+		
+		hibernateTemplate.update(ro);
+	}
+
+	//保存user表编辑到数据库
+	public void savauser(User u) {
+		hibernateTemplate.update(u);
+	}
+
+	//保存organization表的编辑到数据库
+	public void savedep(Organization o) {
+		hibernateTemplate.update(o);
+	}
+
+	//查询部门表 查所有部门
+	public List<OrganizationBean> selorg() {
+		 try {
+	         List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+	               public Object doInHibernate(Session session)  
+	                         throws HibernateException, SQLException {  
+	            	  
+	                    List list2 = session.createQuery("from Organization")  
+	                             .list(); 
+	                    List<OrganizationBean> lists = new ArrayList<>();
+	                    for(int i=0;i<list2.size();i++) {
+	                    	Organization org = (Organization)list2.get(i);
+	                    	
+	                    	OrganizationBean ob = new OrganizationBean();
+	                    	ob.setName(org.getName());
+	                    	ob.setId(org.getId());
+	                    	ob.setSeq(org.getSeq());
+	                    	lists.add(ob);
+	                    }
+	                     return lists;  
+	                 }});  
+	             return list;  
+	        	 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	//查询角色表 取出所有角色
+	public List<RoleBean> selrole() {
+		try {
+	         List list = hibernateTemplate.executeFind(new HibernateCallback(){  
+	               public Object doInHibernate(Session session)  
+	                         throws HibernateException, SQLException {  
+	                    List list2 = session.createQuery("from Role")   
+	                             .list();  
+	                    
+	                    List<RoleBean>lists=new ArrayList<>();
+	                    
+	                    for(int i=0;i<list2.size();i++) {
+	                    	Role r=(Role)list2.get(i);
+	                    	RoleBean rb=new RoleBean();
+	                    	rb.setId(r.getId());
+	                    	rb.setName(r.getName());
+	                    	rb.setSeq(r.getSeq());
+	                    	lists.add(rb);
+	                    }
+	                    
+	                     return lists;  
+	                 }});  
+	             return list;  
+	        	 
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return null;
+	}
+
+	
+
+	
+
+	
+	
+	
+
+}

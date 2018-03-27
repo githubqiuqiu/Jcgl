@@ -1,0 +1,364 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>权明峰教育网</title>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	
+
+	
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	
+	<script src="sss/jquery-1.5.2.js"></script>
+	
+
+</head>
+<body>
+		
+	<div class="fh5co-loader"></div>
+	
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+	
+		<div class="top">
+
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 text-right">
+
+						<ul class="fh5co-social">
+<!-- QQ分享功能 -->						
+<div class="bdsharebuttonbox">
+<a href="javascript:void(0)" class="bds_more" data-cmd="more"></a>
+<a href="javascript:void(0)" class="bds_qzone" data-cmd="qzone"></a>
+<a href="javascript:void(0)" class="bds_tsina" data-cmd="tsina"></a>
+<a href="javascript:void(0)" class="bds_tqq" data-cmd="tqq"></a>
+<a href="javascript:void(0)" class="bds_renren" data-cmd="renren"></a>
+<a href="javascript:void(0)" class="bds_weixin" data-cmd="weixin"></a>
+</div>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="top-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-1">
+						<div id="fh5co-logo"><a href="index.jsp">
+<!-- 主页图片 -->						<img src="images/zy.png">
+						</a></div>
+					</div>
+					<div class="col-xs-11 text-right menu-1">
+												<ul>
+							<li><a href="index.jsp">首页</a></li>
+							
+							<li class="has-dropdown"><!-- 下拉显示 -->
+							<a href="courses.jsp">课程详细</a>
+								<ul class="dropdown">
+									<li><a href="#">成人教育</a></li>
+									<li><a href="#">会计培训</a></li>
+									<li><a href="#">国家开放</a></li>
+									<li><a href="#">远程教育</a></li>
+									<li><a href="#">艺考培训</a></li>
+									<li><a href="#">职业资格</a></li>
+								</ul>
+							</li>
+							
+							<li class="has-dropdown">
+							<a href="pricing.jsp">学习平台</a>
+								<ul class="dropdown">
+									<li><a href="#">模考测试</a></li>
+									<li><a href="#">华东理工</a></li>
+									<li><a href="#">赣南师范</a></li>
+									<li><a href="#">江西师范</a></li>
+									<li><a href="#">江西中医</a></li>
+									<li><a href="#">江西科技</a></li>
+									<li><a href="#">江西广播</a></li>
+								</ul>
+							</li>
+                            <li id="qq"><a>联系我们</a></li>
+							<li class="btn-cta"><a href="#"><span>后台登录</span></a></li>
+							<li class="btn-cta"><a href="#"><span>合作招生</span></a></li>
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</nav>
+
+
+<!-- 触发联系窗口 -->	
+<script type="text/javascript">
+
+$(document).ready(function(){
+$('#qq').click(function (){
+window.open ('NewFile2.jsp', 'newwindow', 'height=460, width=500, top=120, left=450, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+});});
+
+$(document).ready(function(){
+	$('#q2').click(function (){
+	window.open ('NewFile2.jsp', 'newwindow', 'height=460, width=500, top=120, left=450, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=n o, status=no');
+	});});
+</script>
+
+
+<!-- 页面一 -->
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/timg2.gif);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1>学生报名</h1>
+							<h2>陶峰招生管理公共平台，助你平步青云！</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+
+	<div id="fh5co-project">
+		<div class="container-fluid proj-bottom">
+			<div class="row">
+			<center><img  src="images/bm.png" width="80%" height="3%"></center>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="contact1.jsp"><img src="images/ym1.png" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>成人教育报名</h3>
+						<span>了解详情</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="contact01.jsp"><img src="images/ym2.png" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>会计培训报名</h3>
+						<span>了解详情</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/ym3.png" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>国家开放报名</h3>
+						<span>了解详情</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/ym6.png" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>远程教育报名</h3>
+						<span>了解详情</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/ym4.png" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>艺考培训报名</h3>
+						<span>了解详情</span>
+					</a>
+				</div>
+				<div class="col-md-4 col-sm-6 fh5co-project animate-box" data-animate-effect="fadeIn">
+					<a href="#"><img src="images/ym5.png" alt="Free HTML5 Website Template by FreeHTML5.co" class="img-responsive">
+						<h3>职业资格培训</h3>
+						<span>了解详情</span>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="features">
+					<div class="col-md-4 animate-box">
+						<h4>学习</h4>
+						<p>招生管理公共平台”是让各种学生成功就业的学习平台，学历终身可查， 保证学生的就业，月拿高薪不是梦！</p>
+					</div>
+					<div class="col-md-4 animate-box">
+						<h4>考试</h4>
+						<p>还在为自己拿不到高的学历而发愁？这里有专业的老师， 对你进行一对一的辅导。让你逢考必过，轻松愉悦高学历！</p>
+					</div>
+					<div class="col-md-4 animate-box">
+						<h4>拿证</h4>
+						<p>毕业证书国家承认，学信网可查，公司认可。让你职场 上优先坐上好职位！</p>
+					</div>
+				</div>
+				<div class="col-md-12 text-center animate-box">
+					<p><a class="btn btn-primary btn-lg btn-learn" href="pricing.jsp">网上学习</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer id="fh5co-footer" role="contentinfo">
+		<div class="container">
+			<div class="row row-pb-md">
+				<div class="col-md-3 fh5co-widget">
+					<h4>About Learning</h4>
+					<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
+				</div>
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+					<h4>Learning</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="#">Course</a></li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">Terms</a></li>
+						<li><a href="#">Meetups</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+					<h4>Learn &amp; Grow</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="#">Blog</a></li>
+						<li><a href="#">Privacy</a></li>
+						<li><a href="#">Testimonials</a></li>
+						<li><a href="#">Handbook</a></li>
+						<li><a href="#">Held Desk</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+					<h4>Engage us</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="#">Marketing</a></li>
+						<li><a href="#">Visual Assistant</a></li>
+						<li><a href="#">System Analysis</a></li>
+						<li><a href="#">Advertise</a></li>
+					</ul>
+				</div>
+
+				<div class="col-md-2 col-sm-4 col-xs-6 col-md-push-1">
+					<h4>Legal</h4>
+					<ul class="fh5co-footer-links">
+						<li><a href="#">Find Designers</a></li>
+						<li><a href="#">Find Developers</a></li>
+						<li><a href="#">Teams</a></li>
+						<li><a href="#">Advertise</a></li>
+						<li><a href="#">API</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12 text-center">
+
+					<p>
+						<ul class="fh5co-social-icons">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- 页面分享到QQ -->
+	<script>
+window._bd_share_config = {
+"common" : {
+"bdSnsKey" : {},
+"bdText" : "",
+"bdMini" : "2",
+"bdPic" : "",
+"bdStyle" : "0",
+"bdSize" : "16"
+},
+"share" : {},
+"image" : {
+"viewList" : [ "qzone", "tsina",
+"tqq", "renren", "weixin" ],
+"viewText" : "分享到：",
+"viewSize" : "16"
+},
+"selectShare" : {
+"bdContainerClass" : null,
+"bdSelectMiniList" : [ "qzone",
+"tsina", "tqq", "renren",
+"weixin" ]
+}
+};
+with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+ ~(-new Date() / 36e5)];
+</script>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Stellar Parallax -->
+	<script src="js/jquery.stellar.min.js"></script>
+	
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="js/jquery.countTo.js"></script>
+	
+	<!-- 弹出菜单 -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	
+	<!-- 主要的 -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
